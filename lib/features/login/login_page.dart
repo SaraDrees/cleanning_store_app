@@ -1,35 +1,87 @@
+import 'package:cleanning_store_app/core/app_colors.dart';
+import 'package:cleanning_store_app/core/assets.dart';
+import 'package:cleanning_store_app/core/utitlities.dart';
+import 'package:cleanning_store_app/core/view/app_text_field.dart';
 import 'package:cleanning_store_app/features/login/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class LoginPage extends GetView<LoginController>{
+   LoginPage({super.key});
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('login'.tr),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Obx((){
-                return Text(
-                  '${controller.x}',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                );
-              }
-            ),
-          ],
+      backgroundColor: AppColors.whiteColor,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 5.3.w, vertical: 18.h),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+               SizedBox(
+                // height: 20.h,
+                child: Image.asset(Assets.loginVactor, fit: BoxFit.cover,)),
+               SizedBox(height: 4.6.h,),
+              Text(
+              'Welcome Back!',
+              style: TextStyle(
+              color: AppColors.colorPrimary,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w700,
+              ),
+              ),
+              SizedBox(height: 1.h,),
+              Text(
+              'Please Log into your existing account',
+              style: TextStyle(
+              color: AppColors.colorPrimary,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w400,
+              ),
+              ),
+               SizedBox(height: 4.5.h,),
+              AppTextField(
+                controller: nameController, hintText: 'nameHint'.tr,
+                validator: (value) => filedRequired(value),
+                ),
+                SizedBox(height: 1.2.h,),
+              AppTextField(
+                controller: passwordController, hintText: 'password'.tr,
+                validator: (value) => filedRequired(value),
+                ),
+               SizedBox(height: 3.h,),
+              SizedBox(
+                width: double.infinity,
+                height: 6.5.h,
+                child: ElevatedButton(
+                  onPressed: (){
+                    if(_formKey.currentState!.validate()){}
+                  },
+                 style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: AppColors.colorPrimary,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
+                 ),
+                  child: Text(
+                  "login".tr,
+                  style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w700,
+                  ),
+                  ),
+                 ),
+              )
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: controller.increseValue,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
 

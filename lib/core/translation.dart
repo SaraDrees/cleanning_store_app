@@ -4,9 +4,10 @@ class Translation extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'en_US': {
-          'login': 'Login',
-          'name': 'Name',
-          'password': 'your Password',
+          'login': 'Log in',
+          'password': 'Your Password',
+          'nameHint' : 'Your Name',
+          'thisFiledIsRequired':'This filed is required.'
 
         },
         'ar_SA': {
