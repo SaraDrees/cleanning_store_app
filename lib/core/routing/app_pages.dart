@@ -9,6 +9,11 @@ class _AppPages {
       name: AppRoutes.loginPageRoute,
       page: () => LoginPage(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.homePageRoute,
+      page: () => HomePage(),
+      binding: HomeBinding(),
     )
   ];
 }

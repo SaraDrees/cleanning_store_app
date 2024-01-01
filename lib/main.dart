@@ -2,6 +2,8 @@ import 'package:cleanning_store_app/core/constant.dart';
 import 'package:cleanning_store_app/core/routing/routes.dart';
 import 'package:cleanning_store_app/core/theme_manager.dart';
 import 'package:cleanning_store_app/core/translation.dart';
+import 'package:cleanning_store_app/features/home/home_binding.dart';
+import 'package:cleanning_store_app/features/home/home_page.dart';
 import 'package:cleanning_store_app/features/login/login_binding.dart';
 import 'package:cleanning_store_app/features/login/login_page.dart';
 import 'package:flutter/material.dart';

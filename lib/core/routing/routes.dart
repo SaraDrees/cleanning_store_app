@@ -1,7 +1,7 @@
 
 class AppRoutes {
   static const String loginPageRoute = '/';
-  static const String addProductPageRoute = '/addProductPageRoute';
+  static const String homePageRoute = '/homePageRoute';
 
 
 

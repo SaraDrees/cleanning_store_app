@@ -1,12 +1,15 @@
 import 'package:cleanning_store_app/core/app_colors.dart';
 import 'package:cleanning_store_app/core/assets.dart';
+import 'package:cleanning_store_app/core/routing/routes.dart';
 import 'package:cleanning_store_app/core/utitlities.dart';
+import 'package:cleanning_store_app/core/view/app_button_widget.dart';
 import 'package:cleanning_store_app/core/view/app_text_field.dart';
 import 'package:cleanning_store_app/features/login/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends GetView<LoginController>{
    LoginPage({super.key});
 
@@ -58,28 +61,12 @@ class LoginPage extends GetView<LoginController>{
                 validator: (value) => filedRequired(value),
                 ),
                SizedBox(height: 3.h,),
-              SizedBox(
-                width: double.infinity,
-                height: 6.5.h,
-                child: ElevatedButton(
-                  onPressed: (){
-                    if(_formKey.currentState!.validate()){}
-                  },
-                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: AppColors.colorPrimary,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
-                 ),
-                  child: Text(
-                  "login".tr,
-                  style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w700,
-                  ),
-                  ),
-                 ),
-              )
-            ],
+               AppButtonWidget(text: 'login'.tr, onPressed: (){
+                    if(_formKey.currentState!.validate()){
+                      Get.toNamed(AppRoutes.homePageRoute);
+                    }
+                  }),
+             ],
           ),
         ),
       ),

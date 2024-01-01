@@ -7,7 +7,15 @@ class Translation extends Translations {
           'login': 'Log in',
           'password': 'Your Password',
           'nameHint' : 'Your Name',
-          'thisFiledIsRequired':'This filed is required.'
+          'thisFiledIsRequired':'This filed is required.',
+          'mainType' : 'Main Type',
+          'productType' : 'Product Type',
+          'productName' : 'Name',
+          'price' : 'Price',
+          'quantity' : 'Quantity',
+          'input' : 'Input',
+          'addProduct': 'Add New Product',
+          'validateNumber': 'Value should be number'
 
         },
         'ar_SA': {
