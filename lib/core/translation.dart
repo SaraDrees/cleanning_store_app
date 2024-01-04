@@ -15,7 +15,8 @@ class Translation extends Translations {
           'quantity' : 'Quantity',
           'input' : 'Input',
           'addProduct': 'Add New Product',
-          'validateNumber': 'Value should be number'
+          'validateNumber': 'Value should be number',
+          'noResult':'No Result'
 
         },
         'ar_SA': {

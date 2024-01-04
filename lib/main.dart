@@ -1,4 +1,6 @@
+import 'package:cleanning_store_app/app_initial_binding.dart';
 import 'package:cleanning_store_app/core/constant.dart';
+import 'package:cleanning_store_app/core/firebase_store_manager.dart';
 import 'package:cleanning_store_app/core/routing/routes.dart';
 import 'package:cleanning_store_app/core/theme_manager.dart';
 import 'package:cleanning_store_app/core/translation.dart';
@@ -12,7 +14,8 @@ import 'package:sizer/sizer.dart';
 
 part 'package:cleanning_store_app/core/routing/app_pages.dart';
 
-void main() {
+void main()async {
+  await preInitializations();
   runApp(const MyApp());
 }
 
@@ -33,8 +36,14 @@ class MyApp extends StatelessWidget {
           theme: getApplicationTheme(),
           initialRoute: AppRoutes.loginPageRoute,
           getPages: _AppPages.appPages,
+          initialBinding: AppInitialBinding(),
         );
       }
     );
   }
+}
+
+Future preInitializations() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  FirebaseStoreManager.firebaseStoreManager.init();
 }
