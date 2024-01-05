@@ -14,7 +14,7 @@ class FirebaseStoreManager{
     if(data != null){
     await firebaseFirestore.collection(collectionPath).add(data);}
   }
-   Future<void> getData(String collectionPath)async {
-    await firebaseFirestore.collection(collectionPath).get();
+   Future<QuerySnapshot> getData(String collectionPath)async {
+    return await firebaseFirestore.collection(collectionPath).get();
   }
 }

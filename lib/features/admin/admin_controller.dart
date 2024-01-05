@@ -10,7 +10,7 @@ class AdminController extends GetxController{
 
   FirebaseStoreManager firebaseStore;
   
-  late List data=['ll'];
+  late List<Product> data;
   //late List product;
 
 
@@ -24,12 +24,13 @@ class AdminController extends GetxController{
 
 
   Future getProduct() async {
-    QuerySnapshot products = await FirebaseFirestore.instance.collection("product").get();
-    data.addAll(products.docs);
+    // QuerySnapshot products = await FirebaseFirestore.instance.collection("product").get();
+    QuerySnapshot products = await firebaseStore.getData("product");
+    data.addAll(productFromJson(products.docs));
+
     // data.forEach((element) {
     //   product.add(Product(name: element['name'], mainType: element['mainType'], productType: element['productType'], price: element['price'], quantity: element['quantity']));
     // });
-    print(data);
     update(['n']);
 
   }

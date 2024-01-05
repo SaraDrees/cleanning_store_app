@@ -62,8 +62,9 @@ class LoginPage extends GetView<LoginController>{
                 ),
                SizedBox(height: 3.h,),
                AppButtonWidget(text: 'login'.tr, onPressed: (){
+
                     if(_formKey.currentState!.validate()){
-                      Get.toNamed(AppRoutes.homePageRoute);
+                      Get.toNamed(AppRoutes.adminPageRoute);
                     }
 
                   }),

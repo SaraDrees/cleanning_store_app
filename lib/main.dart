@@ -21,7 +21,6 @@ part 'package:cleanning_store_app/core/routing/app_pages.dart';
 
 void main() async {
 
-
   await preInitializations();
   WidgetsFlutterBinding.ensureInitialized();
 

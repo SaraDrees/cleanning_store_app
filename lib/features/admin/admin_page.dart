@@ -30,9 +30,25 @@ class _AdminPageState extends State<AdminPage> {
               appBar: AppBar(
                 bottom: TabBar(
                   tabs: [
-                    ProductsPage(product: c.data)
+                    Tab(
+                      child: Text("Products"),
+                    ),
+                    Tab(
+                      child: Text("Add User"),
+                    ),
+                    Tab(
+                      child: Text("Add Type"),
+                    )
                   ],
                 ),
+
+              ),
+              body: TabBarView(
+                children: [
+                  ProductsPage(data: c.data,),
+                  Center(child: Text("Add User")),
+                  Center(child: Text("Add Type"))
+                ],
               ),
             );
           }
