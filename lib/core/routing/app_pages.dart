@@ -14,6 +14,11 @@ class _AppPages {
       name: AppRoutes.homePageRoute,
       page: () => HomePage(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.adminPageRoute,
+      page: () => AdminPage(),
+      binding: AdminBinding(),
     )
   ];
 }

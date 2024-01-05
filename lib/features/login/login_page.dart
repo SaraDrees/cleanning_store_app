@@ -65,6 +65,7 @@ class LoginPage extends GetView<LoginController>{
                     if(_formKey.currentState!.validate()){
                       Get.toNamed(AppRoutes.homePageRoute);
                     }
+
                   }),
              ],
           ),

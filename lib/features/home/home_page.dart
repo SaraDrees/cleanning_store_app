@@ -17,6 +17,8 @@ class HomePage extends GetView<HomeController>{
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
+
+
   final _formKey = GlobalKey<FormState>();
 
   HomePage({super.key});
@@ -92,7 +94,7 @@ class HomePage extends GetView<HomeController>{
                                  productType: controller.selectedProductType.value,
                                  price: int.parse(priceController.text),
                                  quantity: int.parse(quantityController.text));
-                                await controller.addProduct();
+                                await controller.addProduct(controller.newProduct!);
                                },
                                opacity: 0.2,
                                loadingWidget: const LoadingWidget()

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "793601801695",
+    "project_id": "cleanningstoreapp",
+    "storage_bucket": "cleanningstoreapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793601801695:android:d3d71254a0a111196f186a",
+        "android_client_info": {
+          "package_name": "com.example.cleanning_store_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj64CAlfj25OR2pamKJsiJgNrD23ygb7A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
