@@ -5,7 +5,7 @@ class AppInitialBinding extends Bindings{
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.put(FirebaseStoreManager.firebaseStoreManager.init(),
+    Get.put(FirebaseStoreManager.firebaseStoreManager,
     permanent: true
     );
   }
