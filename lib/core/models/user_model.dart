@@ -3,22 +3,22 @@ import 'dart:convert';
 
 class User {
   String name;
-  String passwoed;
+  String password;
 
   User({
     required this.name,
-    required this.passwoed,
+    required this.password,
 
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     name: json["name"],
-    passwoed: json["password"],
+    password: json["password"],
   );
 
   Map<String, dynamic> toJson() => {
     "name": name,
-    "password": passwoed,
+    "password": password,
   };
 }
 

@@ -1,5 +1,8 @@
+import 'package:cleanning_store_app/core/app_colors.dart';
+import 'package:cleanning_store_app/features/admin/add_user_tab/add_user_tab_view.dart';
 import 'package:cleanning_store_app/features/admin/products_tab/products_tab_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 
@@ -26,30 +29,29 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
         length: 3,
         child: Scaffold(
               appBar: AppBar(
-                bottom: const TabBar(
+                bottom: TabBar(
+                  indicatorColor: AppColors.colorPrimary,
                   tabs: [
                     Tab(
-                      child: Text("Products"),
+                      child: Text("products".tr),
                     ),
                     Tab(
-                      child: Text("Add User"),
+                      child: Text("addUser".tr),
                     ),
                     Tab(
-                      child: Text("Add Type"),
+                      child: Text("addType".tr),
                     )
                   ],
                 ),
 
               ),
               body:  TabBarView(
-                controller: tabController,
-                    children: const [
-                      ProductsTabView(),
-                      Center(child: Text("Add User")),
-                      Center(child: Text("Add Type"))
+                // controller: tabController,
+                    children:  [
+                      const ProductsTabView(),
+                      AddUserTabView(),
+                     const Center(child: Text("Add Type"))
                     ],
-                //   );
-                // }
               ),
 
 

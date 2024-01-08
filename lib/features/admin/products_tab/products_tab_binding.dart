@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class ProductsTabBinding extends Bindings{
   @override
   void dependencies() {
-    Get.lazyPut(() => ProductsTabController(firebaseStore: Get.find()));
+    Get.lazyPut(() => ProductsTabController(firebaseStore: Get.find()),fenix: true);
   }
 
 }

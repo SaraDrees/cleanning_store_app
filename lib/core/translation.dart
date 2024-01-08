@@ -16,7 +16,19 @@ class Translation extends Translations {
           'input' : 'Input',
           'addProduct': 'Add New Product',
           'validateNumber': 'Value should be number',
-          'noResult':'No Result'
+          'noResult':'No Result',
+          'addUser' : 'Add User',
+          'userName' : 'User Name',
+          'userPassword' : 'User Password',
+          'confirmPassword' : 'Confirm Password',
+          'productAdded': 'Product Added',
+          'FailedToAddProduct' : 'Failed to add product',
+          'userAdded': 'User Added',
+          'FailedToAddUser' : 'Failed to add user',
+          'dataAdded': 'Data Added',
+          'FailedToAddData' : 'Failed to add data',
+          'products' : 'Products',
+          'addType' : 'Add Type'
 
         },
         'ar_SA': {

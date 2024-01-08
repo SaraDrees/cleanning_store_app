@@ -1,11 +1,11 @@
 import 'package:cleanning_store_app/core/app_colors.dart';
-import 'package:cleanning_store_app/core/models/product_model.dart';
 import 'package:cleanning_store_app/core/utitlities.dart';
 import 'package:cleanning_store_app/core/view/app_button_widget.dart';
 import 'package:cleanning_store_app/core/view/app_dropDown_widget.dart';
 import 'package:cleanning_store_app/core/view/app_text_field.dart';
 import 'package:cleanning_store_app/core/view/delivery_text_field_title.dart';
 import 'package:cleanning_store_app/core/view/loading_widget.dart';
+import 'package:cleanning_store_app/core/widget_state_widget.dart';
 import 'package:cleanning_store_app/features/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,11 +13,6 @@ import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
 class HomePage extends GetView<HomeController>{
-
-  TextEditingController nameController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
-  TextEditingController quantityController = TextEditingController();
-
 
   final _formKey = GlobalKey<FormState>();
 
@@ -29,9 +24,11 @@ class HomePage extends GetView<HomeController>{
    return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 9.h , horizontal: 5.3.w),
-        child: GetBuilder<HomeController>(
+        child: StateBuilder<HomeController>(
           id: 'new_product',
-          builder: (_) {
+          disableState: true,
+          initialWidgetState: WidgetState.loaded,
+          builder: (widgetState, controller){
             return Form(
               key: _formKey,
               child: Column(
@@ -67,13 +64,13 @@ class HomePage extends GetView<HomeController>{
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"productName".tr, isRequired: true,),
                       ),
-                      AppTextField(controller: nameController, validator: (value) => filedRequired(value),),
+                      AppTextField(controller: controller.nameController, validator: (value) => filedRequired(value),),
                       SizedBox(height: 3.5.h,),
                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"quantity".tr, isRequired: true,),
                       ),
-                      AppTextField(controller: quantityController, validator: (value) => validateNumbers(value??""),
+                      AppTextField(controller: controller.quantityController, validator: (value) => validateNumbers(value??""),
                       keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: 3.5.h,),
@@ -81,34 +78,20 @@ class HomePage extends GetView<HomeController>{
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"price".tr, isRequired: true,),
                       ),
-                      AppTextField(controller: priceController, validator: (value) => validateNumbers(value??""),
+                      AppTextField(controller: controller.priceController, validator: (value) => validateNumbers(value??""),
                       keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: 3.5.h,),
-                       AppButtonWidget(text: 'input'.tr, onPressed: ()async {
-                               if(_formKey.currentState!.validate() && controller.selectedMainType.value.isNotEmpty 
-                               && controller.selectedProductType.value.isNotEmpty){
-                               await Get.showOverlay(asyncFunction: ()async {
-                              controller.newProduct = Product(name: nameController.text,
-                                 mainType: controller.selectedMainType.value,
-                                 productType: controller.selectedProductType.value,
-                                 price: int.parse(priceController.text),
-                                 quantity: int.parse(quantityController.text));
-                                await controller.addProduct(controller.newProduct!);
-                               },
-                               opacity: 0.2,
-                               loadingWidget: const LoadingWidget()
-                               );
-                                Get.showSnackbar( 
-                                 const GetSnackBar(message: "Good Job" ,
-                                 duration: Duration(
-                                  seconds: 3
-                                ),
-                                backgroundColor: AppColors.colorPrimary,)
-                                );
-                            }
-                        }
-                      )
+                       Visibility(
+                        visible: widgetState == WidgetState.loading,
+                         replacement: AppButtonWidget(text: 'input'.tr, onPressed: ()async {
+                                 if(_formKey.currentState!.validate() && controller.selectedMainType.value.isNotEmpty 
+                                 && controller.selectedProductType.value.isNotEmpty){
+                                  await controller.addProduct(controller.newProduct!);
+                              }
+                          }),
+                          child: const LoadingWidget(),
+                       )
                     ],
                   ),
             );
