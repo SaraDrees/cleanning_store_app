@@ -62,8 +62,14 @@ class HomePage extends GetView<HomeController>{
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"subType".tr, isRequired: true,),
                       ),
-                      AppDropDownWidget(selectedValue: controller.selectedSubType, values: controller.subTypes,
-                       onSelect: (value) => controller.selectSubType(value)),
+                      StateBuilder<HomeController>(
+                        id: 'subType',
+                        initialWidgetState: WidgetState.disable,
+                        builder: (widgetState, controller) {
+                          return AppDropDownWidget(selectedValue: controller.selectedSubType, values: controller.subTypes,
+                           onSelect: (value) => controller.selectSubType(value));
+                        }
+                      ),
                      SizedBox(height: 3.5.h,),
                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),

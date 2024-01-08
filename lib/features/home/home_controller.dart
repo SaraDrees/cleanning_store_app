@@ -40,24 +40,25 @@ TextEditingController quantityController = TextEditingController();
 
 void selectMainType(productType value){
   selectedMainType = value ;
+  getSubTypes(selectedMainType?.id??"");
   //get subType by mainTypeId
-  update(['new_product']);
+  update(['mainType']);
 }
 
 void selectSubType(productType value){
   selectedSubType = value ; 
-  update(['new_product']);
+  update(['subType']);
 }
 
 Future addProduct(Product products) async {
   requestMethod(ids: ['new_product'],
   requestType: RequestType.postData, 
   function: () async {
-    // newProduct = Product(name: nameController.text,
-    //     mainType: selectedMainType,
-    //     productType: selectedSubType,
-    //     price: int.parse( priceController.text),
-    //     quantity: int.parse( quantityController.text));
+    newProduct = Product(name: nameController.text,
+        mainType: selectedMainType?.id??"",
+        productType: selectedSubType?.id??"",
+        price: int.parse( priceController.text),
+        quantity: int.parse( quantityController.text));
     await firebaseStore.addData( data:newProduct?.toJson(), 
     collectionPath: Constant.productCollectionPath,
     message: 'productAdded'.tr, errorMessage: 'FailedToAddProduct'.tr
@@ -72,11 +73,23 @@ Future getMainTypes() async {
   requestMethod(ids: ['mainType'],
   requestType: RequestType.getData, 
   function: () async {
-  QuerySnapshot result = await firebaseStore.getData(Constant.typeCollectionPath);
+  QuerySnapshot result = await firebaseStore.getData(Constant.mainTypeCollectionPath);
+  mainTypes.clear();
    mainTypes.addAll(productTypeFromJson(result.docs));
     return null ;
       });
- 
+}
+
+Future getSubTypes(String mainTypeId) async {
+  requestMethod(ids: ['subType'],
+  requestType: RequestType.getData, 
+  function: () async {
+  QuerySnapshot result = await firebaseStore.getData('${Constant.mainTypeCollectionPath}/$mainTypeId/${Constant.subTypeCollectionPath}');
+  subTypes.clear();
+  subTypes.addAll(productTypeFromJson(result.docs));
+  selectedSubType = null;
+    return null ;
+      });
 }
 
 void clearData(){

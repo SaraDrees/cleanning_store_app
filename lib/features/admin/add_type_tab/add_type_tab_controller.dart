@@ -30,7 +30,7 @@ class AddTypeTabController extends GetxStateController{
         type = productType(name: typeController.text);
       //  await Future.delayed(const Duration(seconds: 1));
       await firebaseStore.addData(data: type?.toJson(),
-         collectionPath: Constant.typeCollectionPath,
+         collectionPath: Constant.mainTypeCollectionPath,
           message: 'typeAdded'.tr, errorMessage: 'FailedToAddType'.tr
          );
        clearData();
