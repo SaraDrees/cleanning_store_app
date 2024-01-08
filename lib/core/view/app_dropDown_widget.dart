@@ -32,7 +32,7 @@ class AppDropDownWidget extends StatelessWidget {
                 items: List.generate(values.length,
                 (i) => DropdownMenuItem(
                 value: values[i],
-                child: Text(values[i])))  , 
+                child: Text(values[i].name)))  , 
               onChanged: (g)=> onSelect(g))
         );
   }

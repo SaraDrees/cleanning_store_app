@@ -53,7 +53,7 @@ class HomePage extends GetView<HomeController>{
                       StateBuilder<HomeController>(
                         id: 'mainType',
                         builder: (widgetState, controller) {
-                          return AppDropDownWidget(selectedValue: controller.selectedMainType.value, values: controller.mainTypes,
+                          return AppDropDownWidget(selectedValue: controller.selectedMainType, values: controller.mainTypes,
                            onSelect: (value) => controller.selectMainType(value));
                         }
                       ),
@@ -62,7 +62,7 @@ class HomePage extends GetView<HomeController>{
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"subType".tr, isRequired: true,),
                       ),
-                      AppDropDownWidget(selectedValue: controller.selectedSubType.value, values: controller.subTypes,
+                      AppDropDownWidget(selectedValue: controller.selectedSubType, values: controller.subTypes,
                        onSelect: (value) => controller.selectSubType(value)),
                      SizedBox(height: 3.5.h,),
                      Padding(
@@ -90,8 +90,8 @@ class HomePage extends GetView<HomeController>{
                        Visibility(
                         visible: widgetState == WidgetState.loading,
                          replacement: AppButtonWidget(text: 'input'.tr, onPressed: ()async {
-                                 if(_formKey.currentState!.validate() && controller.selectedMainType.value.isNotEmpty 
-                                 && controller.selectedSubType.value.isNotEmpty){
+                                 if(_formKey.currentState!.validate() && controller.selectedMainType == null 
+                                 && controller.selectedSubType == null){
                                   await controller.addProduct(controller.newProduct!);
                               }
                           }),

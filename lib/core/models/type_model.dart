@@ -1,6 +1,8 @@
 
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class productType {
   String ?id ;
   String name;
@@ -13,9 +15,9 @@ class productType {
 
   });
 
-  factory productType.fromJson(Map<String, dynamic> json) => productType(
-    id: json['_id'],
-    name: json["name"],
+  factory productType.fromJson(QueryDocumentSnapshot snapshot) => productType(
+    id: snapshot.reference.id,
+    name: snapshot['name'],
     // type: json['type']
   );
 
