@@ -3,7 +3,7 @@ import 'package:cleanning_store_app/core/utitlities.dart';
 import 'package:cleanning_store_app/core/view/app_button_widget.dart';
 import 'package:cleanning_store_app/core/view/app_dropDown_widget.dart';
 import 'package:cleanning_store_app/core/view/app_text_field.dart';
-import 'package:cleanning_store_app/core/view/delivery_text_field_title.dart';
+import 'package:cleanning_store_app/core/view/app_text_field_title.dart';
 import 'package:cleanning_store_app/core/view/loading_widget.dart';
 import 'package:cleanning_store_app/core/widget_state_widget.dart';
 import 'package:cleanning_store_app/features/home/home_controller.dart';
@@ -50,15 +50,20 @@ class HomePage extends GetView<HomeController>{
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"mainType".tr, isRequired: true,),
                       ),
-                      AppDropDownWidget(selectedValue: controller.selectedMainType.value, values: controller.mainTypes,
-                       onSelect: (value) => controller.selectMainType(value)),
+                      StateBuilder<HomeController>(
+                        id: 'mainType',
+                        builder: (widgetState, controller) {
+                          return AppDropDownWidget(selectedValue: controller.selectedMainType.value, values: controller.mainTypes,
+                           onSelect: (value) => controller.selectMainType(value));
+                        }
+                      ),
                      SizedBox(height: 3.5.h,),
                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: AppTextFieldTitle( text:"productType".tr, isRequired: true,),
+                        child: AppTextFieldTitle( text:"subType".tr, isRequired: true,),
                       ),
-                      AppDropDownWidget(selectedValue: controller.selectedProductType.value, values: controller.productTypes,
-                       onSelect: (value) => controller.selectProductType(value)),
+                      AppDropDownWidget(selectedValue: controller.selectedSubType.value, values: controller.subTypes,
+                       onSelect: (value) => controller.selectSubType(value)),
                      SizedBox(height: 3.5.h,),
                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -86,7 +91,7 @@ class HomePage extends GetView<HomeController>{
                         visible: widgetState == WidgetState.loading,
                          replacement: AppButtonWidget(text: 'input'.tr, onPressed: ()async {
                                  if(_formKey.currentState!.validate() && controller.selectedMainType.value.isNotEmpty 
-                                 && controller.selectedProductType.value.isNotEmpty){
+                                 && controller.selectedSubType.value.isNotEmpty){
                                   await controller.addProduct(controller.newProduct!);
                               }
                           }),

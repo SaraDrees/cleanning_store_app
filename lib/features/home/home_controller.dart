@@ -1,6 +1,7 @@
 import 'package:cleanning_store_app/core/constant.dart';
 import 'package:cleanning_store_app/core/firebase_store_manager.dart';
 import 'package:cleanning_store_app/core/models/product_model.dart';
+import 'package:cleanning_store_app/core/models/type_model.dart';
 import 'package:cleanning_store_app/core/request_mixin.dart';
 import 'package:cleanning_store_app/core/state_mixin.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +12,10 @@ class HomeController extends GetxStateController{
 HomeController({required this.firebaseStore});
 
 RxString selectedMainType = ''.obs;
-RxString selectedProductType = ''.obs;
+RxString selectedSubType = ''.obs;
 
-List<String> mainTypes = ["A" , "B", "c" , "D"];
-List<String> productTypes = ["a" , "b", "c" , "d"];
+List<productType> mainTypes = [] ;
+List<productType> subTypes = [] ;
 
 
 FirebaseStoreManager firebaseStore;
@@ -25,10 +26,11 @@ TextEditingController priceController = TextEditingController();
 TextEditingController quantityController = TextEditingController();
 
 @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
-    selectedMainType.value = mainTypes.first;
-    selectedProductType.value = productTypes.first;
+    await getMainTypes();
+    selectedMainType.value = mainTypes.first.name;
+    selectedSubType.value = subTypes.first.name;
     nameController.text = newProduct?.name??"";
     priceController.text = newProduct?.price.toString()??"";
     quantityController.text = newProduct?.quantity.toString()??"";
@@ -40,8 +42,8 @@ void selectMainType(String value){
   update(['new_product']);
 }
 
-void selectProductType(String value){
-  selectedProductType.value = value ; 
+void selectSubType(String value){
+  selectedSubType.value = value ; 
   update(['new_product']);
 }
 
@@ -51,7 +53,7 @@ Future addProduct(Product products) async {
   function: () async {
     newProduct = Product(name: nameController.text,
         mainType: selectedMainType.value,
-        productType: selectedProductType.value,
+        productType: selectedSubType.value,
         price: int.parse( priceController.text),
         quantity: int.parse( quantityController.text));
     await firebaseStore.addData( data:newProduct?.toJson(), 
@@ -64,13 +66,28 @@ Future addProduct(Product products) async {
  
 }
 
+Future getMainTypes() async {
+  requestMethod(ids: ['mainType'],
+  requestType: RequestType.getData, 
+  function: () async {
+    Future.delayed(const Duration(seconds: 1), () { 
+    mainTypes.addAll(List.generate(5, (index) => productType(name: 'type$index')));
+    subTypes.addAll(List.generate(20, (index) => productType(name: 'subType$index')));
+    });
+  //  QuerySnapshot result = await firebaseStore.getData(Constant.typeCollectionPath);
+  //   mainTypes.addAll(productTypeFromJson(result.docs.map((e) => e.data() as Map<String, dynamic>? ).toList()));
+    return null ;
+      });
+ 
+}
+
 void clearData(){
     newProduct = null ;
     nameController.text = '' ;
     priceController.text = '';
     quantityController.text = '';
-    selectedMainType.value = mainTypes.first;
-    selectedProductType.value = productTypes.first;
+    selectedMainType.value = mainTypes.first.name;
+    selectedSubType.value = subTypes.first.name;
     update(['new_product']);
   }
 

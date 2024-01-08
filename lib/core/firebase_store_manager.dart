@@ -13,8 +13,8 @@ class FirebaseStoreManager{
     required String collectionPath , String? message , String ?errorMessage}) async {
     if(data != null){
     await firebaseFirestore.collection(collectionPath).add(data)
-    .then((value) => AppSnackbar.show(message??"dataAdded".tr))
-      .catchError((error) =>  AppSnackbar.show("${errorMessage??"FailedToAddData".tr}: $error"));}
+    .then((value) => AppSnackbar.show( message:message??"dataAdded".tr))
+      .catchError((error) =>  AppSnackbar.show( message:"${errorMessage??"FailedToAddData".tr}: $error", error: true));}
   }
    Future<QuerySnapshot> getData(String collectionPath)async {
     return await firebaseFirestore.collection(collectionPath).get();

@@ -14,6 +14,8 @@ class AddUserTabController extends GetxStateController{
   User ?user;
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  List<String> roles = ['employee','admin'];
+  String? selectedRole ;
 
 
   @override
@@ -28,22 +30,28 @@ class AddUserTabController extends GetxStateController{
       ids: ["addUser"],
       requestType: RequestType.postData,
       function: () async {
-        user = User(name: nameController.text, password: passwordController.text);
+        user = User(name: nameController.text, password: passwordController.text, role: selectedRole??"");
       //  await Future.delayed(const Duration(seconds: 1));
       await firebaseStore.addData(data: user?.toJson(),
          collectionPath: Constant.userCollectionPath,
           message: 'userAdded'.tr, errorMessage: 'FailedToAddUser'.tr
          );
        clearData();
-       AppSnackbar.show("userAdded".tr);
+       AppSnackbar.show(message:"userAdded".tr);
         return null;
       });
+  }
+
+  void selectRole(String r){
+    selectedRole = r ;
+    update(['addUser']);
   }
 
   void clearData(){
     user = null ;
     nameController.text = '' ;
     passwordController.text = '';
+    selectedRole = null;
     update(['addUser']);
   }
 

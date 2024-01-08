@@ -1,26 +1,24 @@
 import 'package:cleanning_store_app/core/utitlities.dart';
 import 'package:cleanning_store_app/core/view/app_button_widget.dart';
-import 'package:cleanning_store_app/core/view/app_dropDown_widget.dart';
-import 'package:cleanning_store_app/core/view/app_snackbar.dart';
 import 'package:cleanning_store_app/core/view/app_text_field.dart';
 import 'package:cleanning_store_app/core/view/app_text_field_title.dart';
 import 'package:cleanning_store_app/core/view/loading_widget.dart';
 import 'package:cleanning_store_app/core/widget_state_widget.dart';
-import 'package:cleanning_store_app/features/admin/add_user_tab/add_user_tab_controller.dart';
+import 'package:cleanning_store_app/features/admin/add_type_tab/add_type_tab_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
-class AddUserTabView extends GetView<AddUserTabController>{
-  AddUserTabView({super.key});
+class AddTypeTabView extends GetView<AddTypeTabController>{
+  AddTypeTabView({super.key});
 
   final _useFormKey = GlobalKey<FormState>();
    
   @override
   Widget build(BuildContext context) {
-    return StateBuilder<AddUserTabController>(
-    id: "addUser",
+    return StateBuilder<AddTypeTabController>(
+    id: "addType",
     disableState: true,
     initialWidgetState: WidgetState.loaded,
      builder: (widgetState, controller) { 
@@ -31,28 +29,22 @@ class AddUserTabView extends GetView<AddUserTabController>{
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              AppTextFieldTitle(text: "userName".tr, isRequired: true),
+              AppTextFieldTitle(text: "selectType".tr, isRequired: true),
               AppTextField(
-                controller: controller.nameController,
+                controller: controller.typeController,
                 validator: (value) => filedRequired(value),
                 ),
-                SizedBox(height: 2.2.h,),
-              AppTextFieldTitle(text: "userPassword".tr, isRequired: true),
-              AppTextField(
-                controller: controller.passwordController,
-                validator: (value) => filedRequired(value),
-                ),
-                SizedBox(height: 2.2.h,),
-              AppTextFieldTitle(text: "userRole".tr, isRequired: true),
-              AppDropDownWidget(selectedValue: controller.selectedRole, values: controller.roles, onSelect: (r) => controller.selectRole(r)),
+              // AppDropDownWidget(selectedValue: controller.selectedType, values: controller.types, 
+              // onSelect: (t) => controller.selectType(t)),
                SizedBox(height: 6.h,),
                Visibility(
                 visible: widgetState == WidgetState.loading,
-                 replacement: AppButtonWidget(text: 'addUser'.tr, onPressed: (){
-                  if(controller.selectedRole == null){
-                    AppSnackbar.show( message: "select user's role" ,error: true);
-                  } else if(_useFormKey.currentState!.validate()){
-                        controller.addUser();
+                 replacement: AppButtonWidget(text: 'addType'.tr, onPressed: (){
+                  // if(controller.selectedType == null){
+                  //   AppSnackbar.show( message: "selectUserType".tr ,error: true);
+                  // } else 
+                 if(_useFormKey.currentState!.validate()){
+                        controller.addType();
                       }}),
                 child: const LoadingWidget(),
                ),

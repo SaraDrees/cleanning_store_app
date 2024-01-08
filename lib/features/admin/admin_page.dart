@@ -1,4 +1,5 @@
 import 'package:cleanning_store_app/core/app_colors.dart';
+import 'package:cleanning_store_app/features/admin/add_type_tab/add_type_tab_view.dart';
 import 'package:cleanning_store_app/features/admin/add_user_tab/add_user_tab_view.dart';
 import 'package:cleanning_store_app/features/admin/products_tab/products_tab_view.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
                     children:  [
                       const ProductsTabView(),
                       AddUserTabView(),
-                     const Center(child: Text("Add Type"))
+                      AddTypeTabView()
                     ],
               ),
 

@@ -9,7 +9,7 @@ class Translation extends Translations {
           'nameHint' : 'Your Name',
           'thisFiledIsRequired':'This filed is required.',
           'mainType' : 'Main Type',
-          'productType' : 'Product Type',
+          'subType' : 'Sub Type',
           'productName' : 'Name',
           'price' : 'Price',
           'quantity' : 'Quantity',
@@ -28,8 +28,11 @@ class Translation extends Translations {
           'dataAdded': 'Data Added',
           'FailedToAddData' : 'Failed to add data',
           'products' : 'Products',
-          'addType' : 'Add Type'
-
+          'addType' : 'Add Type',
+          'typeAdded': 'Type Added',
+          'FailedToAddType' : 'Failed to add type',
+          'loginSuccessflly': 'Login Successflly',
+          'FailedToLogin' : 'Failed to Login',
         },
         'ar_SA': {
         }

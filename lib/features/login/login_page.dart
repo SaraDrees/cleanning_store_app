@@ -1,9 +1,10 @@
 import 'package:cleanning_store_app/core/app_colors.dart';
 import 'package:cleanning_store_app/core/assets.dart';
-import 'package:cleanning_store_app/core/routing/routes.dart';
+import 'package:cleanning_store_app/core/models/user_model.dart';
 import 'package:cleanning_store_app/core/utitlities.dart';
 import 'package:cleanning_store_app/core/view/app_button_widget.dart';
 import 'package:cleanning_store_app/core/view/app_text_field.dart';
+import 'package:cleanning_store_app/core/widget_state_widget.dart';
 import 'package:cleanning_store_app/features/login/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -61,13 +62,20 @@ class LoginPage extends GetView<LoginController>{
                 validator: (value) => filedRequired(value),
                 ),
                SizedBox(height: 3.h,),
-               AppButtonWidget(text: 'login'.tr, onPressed: (){
+               StateBuilder<LoginController>(
+                id: 'login',
+                initialWidgetState: WidgetState.loaded,
+                 builder: (widgetState, controller) {
+                   return AppButtonWidget(text: 'login'.tr, onPressed: (){
+                        if(_formKey.currentState!.validate()){
+                          controller.user = User(name: nameController.text, 
+                          password: passwordController.text);
+                         controller.login();
+                        }
 
-                    if(_formKey.currentState!.validate()){
-                      Get.toNamed(AppRoutes.adminPageRoute);
-                    }
-
-                  }),
+                      });
+                 }
+               ),
              ],
           ),
         ),
