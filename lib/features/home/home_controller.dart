@@ -55,8 +55,8 @@ Future addProduct() async {
   requestType: RequestType.postData, 
   function: () async {
     newProduct = Product(name: nameController.text,
-        mainType: selectedMainType?.id??"",
-        subType: selectedSubType?.id??"",
+        mainType: selectedMainType?.name??"",
+        subType: selectedSubType?.name??"",
         price: int.parse( priceController.text),
         quantity: int.parse( quantityController.text));
     await firebaseStore.addData( data:newProduct?.toJson(), 
