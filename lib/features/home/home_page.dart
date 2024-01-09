@@ -96,9 +96,9 @@ class HomePage extends GetView<HomeController>{
                        Visibility(
                         visible: widgetState == WidgetState.loading,
                          replacement: AppButtonWidget(text: 'input'.tr, onPressed: ()async {
-                                 if(_formKey.currentState!.validate() && controller.selectedMainType == null 
-                                 && controller.selectedSubType == null){
-                                  await controller.addProduct(controller.newProduct!);
+                                 if(_formKey.currentState!.validate() && controller.selectedMainType != null 
+                                 && controller.selectedSubType != null){
+                                  await controller.addProduct();
                               }
                           }),
                           child: const LoadingWidget(),

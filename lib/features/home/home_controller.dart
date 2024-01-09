@@ -50,13 +50,13 @@ void selectSubType(productType value){
   update(['subType']);
 }
 
-Future addProduct(Product products) async {
+Future addProduct() async {
   requestMethod(ids: ['new_product'],
   requestType: RequestType.postData, 
   function: () async {
     newProduct = Product(name: nameController.text,
         mainType: selectedMainType?.id??"",
-        productType: selectedSubType?.id??"",
+        subType: selectedSubType?.id??"",
         price: int.parse( priceController.text),
         quantity: int.parse( quantityController.text));
     await firebaseStore.addData( data:newProduct?.toJson(), 
@@ -97,8 +97,8 @@ void clearData(){
     nameController.text = '' ;
     priceController.text = '';
     quantityController.text = '';
-    selectedMainType = mainTypes.first;
-    selectedSubType = subTypes.first;
+    selectedMainType = null;
+    selectedSubType = null;
     update(['new_product']);
   }
 

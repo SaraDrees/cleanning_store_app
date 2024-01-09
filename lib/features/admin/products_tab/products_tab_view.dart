@@ -20,7 +20,7 @@ class ProductsTabView extends GetView<ProductsTabController>{
        },
        itemCount: controller.data.length,
          itemBuilder: (context,i){
-           return CardProduct(name: controller.data[i].name,mainType: controller.data[i].mainType,productType: controller.data[i].productType,price: controller.data[i].price,quantity: controller.data[i].quantity,);
+           return CardProduct(name: controller.data[i].name,mainType: controller.data[i].mainType,productType: controller.data[i].subType,price: controller.data[i].price,quantity: controller.data[i].quantity,);
      });}
      ) ;
   }

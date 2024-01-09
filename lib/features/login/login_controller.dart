@@ -24,7 +24,7 @@ class LoginController extends GetxStateController{
   //  await firebaseStore.addData(collectionPath:Constant.userCollectionPath,
   //   data: user?.toJson(), message: 'loginSuccessflly'.tr , errorMessage: 'FailedToLogin'.tr
   //  );
-    Get.toNamed(AppRoutes.homePageRoute);
+    Get.toNamed(AppRoutes.adminPageRoute);
     // return null ;
     //   });
  

@@ -9,14 +9,14 @@ String productToJson(Product data) => json.encode(data.toJson());
 class Product {
     String name;
     String mainType;
-    String productType;
+    String subType;
     int price;
     int quantity;
 
     Product({
         required this.name,
         required this.mainType,
-        required this.productType,
+        required this.subType,
         required this.price,
         required this.quantity,
     });
@@ -24,7 +24,7 @@ class Product {
     factory Product.fromJson(Map<String, dynamic> json) => Product(
         name: json["name"],
         mainType: json["mainType"],
-        productType: json["productType"],
+        subType: json["subType"],
         price: json["price"],
         quantity: json["quantity"],
     );
@@ -32,7 +32,7 @@ class Product {
     Map<String, dynamic> toJson() => {
         "name": name,
         "mainType": mainType,
-        "productType": productType,
+        "subType": subType,
         "price": price,
         "quantity": quantity,
     };
