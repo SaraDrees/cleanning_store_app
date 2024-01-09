@@ -57,7 +57,7 @@ class HomePage extends GetView<HomeController>{
                            onSelect: (value) => controller.selectMainType(value));
                         }
                       ),
-                     SizedBox(height: 3.5.h,),
+                     SizedBox(height: 1.5.h,),
                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"subType".tr, isRequired: true,),
@@ -70,13 +70,13 @@ class HomePage extends GetView<HomeController>{
                            onSelect: (value) => controller.selectSubType(value));
                         }
                       ),
-                     SizedBox(height: 3.5.h,),
+                     SizedBox(height: 1.5.h,),
                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"productName".tr, isRequired: true,),
                       ),
                       AppTextField(controller: controller.nameController, validator: (value) => filedRequired(value),),
-                      SizedBox(height: 3.5.h,),
+                      SizedBox(height: 1.5.h,),
                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"quantity".tr, isRequired: true,),
@@ -84,7 +84,7 @@ class HomePage extends GetView<HomeController>{
                       AppTextField(controller: controller.quantityController, validator: (value) => validateNumbers(value??""),
                       keyboardType: TextInputType.number,
                       ),
-                      SizedBox(height: 3.5.h,),
+                      SizedBox(height: 1.5.h,),
                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"price".tr, isRequired: true,),

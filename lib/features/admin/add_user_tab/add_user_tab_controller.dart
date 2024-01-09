@@ -3,7 +3,6 @@ import 'package:cleanning_store_app/core/firebase_store_manager.dart';
 import 'package:cleanning_store_app/core/models/user_model.dart';
 import 'package:cleanning_store_app/core/request_mixin.dart';
 import 'package:cleanning_store_app/core/state_mixin.dart';
-import 'package:cleanning_store_app/core/view/app_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,13 +29,12 @@ class AddUserTabController extends GetxStateController{
       ids: ["addUser"],
       requestType: RequestType.postData,
       function: () async {
-        user = User(name: nameController.text, password: passwordController.text, role: true);
+        user = User(name: nameController.text, password: passwordController.text, role: selectedRole == 'admin');
       await firebaseStore.addData(data: user?.toJson(),
          collectionPath: Constant.userCollectionPath,
-          message: 'userAdded'.tr, errorMessage: 'FailedToAddUser'.tr
+          message: 'user ${user?.name} Added'.tr, errorMessage: 'FailedToAddUser'.tr
          );
        clearData();
-       AppSnackbar.show(message:"userAdded".tr);
         return null;
       });
   }
