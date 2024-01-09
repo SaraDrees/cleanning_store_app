@@ -32,7 +32,7 @@ class Translation extends Translations {
           'typeAdded': 'Type Added',
           'FailedToAddType' : 'Failed to add type',
           'loginSuccessflly': 'Login Successflly',
-          'FailedToLogin' : 'Failed to Login',
+          'FailedToLogin' : 'Failed to Login, User not found',
         },
         'ar_SA': {
         }

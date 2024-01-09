@@ -30,8 +30,7 @@ class AddUserTabController extends GetxStateController{
       ids: ["addUser"],
       requestType: RequestType.postData,
       function: () async {
-        user = User(name: nameController.text, password: passwordController.text, role: selectedRole??"");
-      //  await Future.delayed(const Duration(seconds: 1));
+        user = User(name: nameController.text, password: passwordController.text, role: true);
       await firebaseStore.addData(data: user?.toJson(),
          collectionPath: Constant.userCollectionPath,
           message: 'userAdded'.tr, errorMessage: 'FailedToAddUser'.tr

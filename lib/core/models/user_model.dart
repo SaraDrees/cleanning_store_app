@@ -4,7 +4,7 @@ import 'dart:convert';
 class User {
   String name;
   String password;
-  String ?role;
+  bool ?role;
 
   User({
     required this.name,
@@ -16,16 +16,17 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => User(
     name: json["name"],
     password: json["password"],
-    role: json['role']
+    role: json['rule']
   );
 
   Map<String, dynamic> toJson() => {
     "name": name,
     "password": password,
-    'role' : role
+    'rule' : role
   };
 }
 
-User productFromJson(String str) => User.fromJson(json.decode(str));
+List<User> userFromJson(List str) => List<User>.from(str.map((x) => User.fromJson(x)));
 
-String productToJson(User data) => json.encode(data.toJson());
+
+String userToJson(User data) => json.encode(data.toJson());
