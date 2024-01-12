@@ -34,6 +34,8 @@ class Translation extends Translations {
           'FailedToAddType' : 'Failed to add type',
           'loginSuccessflly': 'Login Successflly',
           'FailedToLogin' : 'Failed to Login, User not found',
+          'menu': 'menu',
+          'signOut':'signOut'
         },
         'ar_SA': {
         }

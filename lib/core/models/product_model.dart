@@ -35,7 +35,7 @@ class Product {
         inOut: json["inOut"]??"",
         type: json["type"]??"",
         date: json["date"]??"",
-        empName: json["empName"]
+        empName: json["empName"]??""
     );
 
     Map<String, dynamic> toJson() => {
