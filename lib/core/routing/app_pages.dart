@@ -19,6 +19,11 @@ class _AppPages {
       name: AppRoutes.adminPageRoute,
       page: () => AdminPage(),
       binding: AdminBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.addUser,
+      page: () => AddUserTabView(),
+      binding: AdminBinding(),
     )
   ];
 }

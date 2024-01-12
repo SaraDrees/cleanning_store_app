@@ -66,7 +66,7 @@ class LoginPage extends GetView<LoginController>{
                 id: 'login',
                 initialWidgetState: WidgetState.loaded,
                  builder: (widgetState, controller) {
-                   return AppButtonWidget(text: 'login'.tr, onPressed: (){
+                   return AppButtonWidget(color:Color(0xff2BC990) , text: 'login'.tr, onPressed: (){
                         if(_formKey.currentState!.validate()){
                           controller.user = User(name: nameController.text, 
                           password: passwordController.text);

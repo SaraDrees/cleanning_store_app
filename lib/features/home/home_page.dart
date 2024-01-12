@@ -45,7 +45,7 @@ class HomePage extends GetView<HomeController>{
                         ),
                         ),
                       ),
-                     SizedBox(height: 3.5.h,),
+                      SizedBox(height: 3.5.h,),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"mainType".tr, isRequired: true,),
@@ -57,27 +57,27 @@ class HomePage extends GetView<HomeController>{
                            onSelect: (value) => controller.selectMainType(value));
                         }
                       ),
-                     SizedBox(height: 1.5.h,),
-                     Padding(
+                      SizedBox(height: 1.5.h,),
+                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: AppTextFieldTitle( text:"subType".tr, isRequired: true,),
+                        child: AppTextFieldTitle( text:"name".tr, isRequired: true,),
                       ),
                       StateBuilder<HomeController>(
                         id: 'subType',
                         initialWidgetState: WidgetState.disable,
                         builder: (widgetState, controller) {
-                          return AppDropDownWidget(selectedValue: controller.selectedSubType, values: controller.subTypes,
+                          return AppDropDownWidget(selectedValue: controller.selectedName, values: controller.name,
                            onSelect: (value) => controller.selectSubType(value));
                         }
                       ),
-                     SizedBox(height: 1.5.h,),
-                     Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: AppTextFieldTitle( text:"productName".tr, isRequired: true,),
-                      ),
-                      AppTextField(controller: controller.nameController, validator: (value) => filedRequired(value),),
                       SizedBox(height: 1.5.h,),
-                     Padding(
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 5.w),
+                      //   child: AppTextFieldTitle( text:"productName".tr, isRequired: true,),
+                      // ),
+                      // AppTextField(controller: controller.nameController, validator: (value) => filedRequired(value),),
+                      SizedBox(height: 1.5.h,),
+                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"quantity".tr, isRequired: true,),
                       ),
@@ -85,24 +85,40 @@ class HomePage extends GetView<HomeController>{
                       keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: 1.5.h,),
-                     Padding(
+                      Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
                         child: AppTextFieldTitle( text:"price".tr, isRequired: true,),
                       ),
-                      AppTextField(controller: controller.priceController, validator: (value) => validateNumbers(value??""),
+                      AppTextField(controller: controller.invoiceNumberController, validator: (value) => validateNumbers(value??""),
                       keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: 3.5.h,),
-                       Visibility(
-                        visible: widgetState == WidgetState.loading,
-                         replacement: AppButtonWidget(text: 'input'.tr, onPressed: ()async {
-                                 if(_formKey.currentState!.validate() && controller.selectedMainType != null 
-                                 && controller.selectedSubType != null){
-                                  await controller.addProduct();
-                              }
-                          }),
-                          child: const LoadingWidget(),
-                       )
+
+                          Visibility(
+                            visible: widgetState == WidgetState.loading,
+                            replacement: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                AppButtonWidget(
+                                    color: Color(0xff2BC990),
+                                    text: 'input'.tr, onPressed: ()async {
+                                  if(_formKey.currentState!.validate() && controller.selectedMainType != null
+                                      && controller.selectedName != null){
+                                    await controller.addProduct(inOut: "in");
+                                  }
+                                }),
+                                AppButtonWidget(
+                                    color: Color(0xffff5969),
+                                    text: 'output'.tr, onPressed: ()async {
+                                  if(_formKey.currentState!.validate() && controller.selectedMainType != null
+                                      && controller.selectedName != null){
+                                    await controller.addProduct(inOut: "out");
+                                  }
+                                }),
+                              ],
+                            ),
+                            child: const LoadingWidget(),
+                          ),
                     ],
                   ),
             );

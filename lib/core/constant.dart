@@ -7,7 +7,7 @@ class Constant {
   static const productCollectionPath = "product" ;
   static const userCollectionPath = "user" ;
   static const mainTypeCollectionPath = "mainType" ;
-  static const subTypeCollectionPath = "subType" ;
+  static const subTypeCollectionPath = "name" ;
   static const String en = "en_US" ;
   static const String ar = "ar" ;
 

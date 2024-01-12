@@ -19,48 +19,52 @@ class AddUserTabView extends GetView<AddUserTabController>{
    
   @override
   Widget build(BuildContext context) {
-    return StateBuilder<AddUserTabController>(
-    id: "addUser",
-    disableState: true,
-    initialWidgetState: WidgetState.loaded,
-     builder: (widgetState, controller) { 
-      return SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 5.3.w, vertical: 15.h),
-        child: Form(
-          key: _useFormKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              AppTextFieldTitle(text: "userName".tr, isRequired: true),
-              AppTextField(
-                controller: controller.nameController,
-                validator: (value) => filedRequired(value),
+    return Scaffold(
+      body: StateBuilder<AddUserTabController>(
+          id: "addUser",
+          disableState: true,
+          initialWidgetState: WidgetState.loaded,
+          builder: (widgetState, controller) {
+            return SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 5.3.w, vertical: 15.h),
+              child: Form(
+                key: _useFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    AppTextFieldTitle(text: "userName".tr, isRequired: true),
+                    AppTextField(
+                      controller: controller.nameController,
+                      validator: (value) => filedRequired(value),
+                    ),
+                    SizedBox(height: 2.2.h,),
+                    AppTextFieldTitle(text: "userPassword".tr, isRequired: true),
+                    AppTextField(
+                      controller: controller.passwordController,
+                      validator: (value) => filedRequired(value),
+                    ),
+                    SizedBox(height: 2.2.h,),
+                    AppTextFieldTitle(text: "userRole".tr, isRequired: true),
+                    AppDropDownWidget(selectedValue: controller.selectedRole, values: controller.roles, onSelect: (r) => controller.selectRole(r)),
+                    SizedBox(height: 6.h,),
+                    Visibility(
+                      visible: widgetState == WidgetState.loading,
+                      replacement: AppButtonWidget(
+                        color: Color(0xff2BC990),
+                          text: 'addUser'.tr, onPressed: (){
+                        if(controller.selectedRole == null){
+                          AppSnackbar.show( message: "select user's role" ,error: true);
+                        } else if(_useFormKey.currentState!.validate()){
+                          controller.addUser();
+                        }}),
+                      child: const LoadingWidget(),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 2.2.h,),
-              AppTextFieldTitle(text: "userPassword".tr, isRequired: true),
-              AppTextField(
-                controller: controller.passwordController,
-                validator: (value) => filedRequired(value),
-                ),
-                SizedBox(height: 2.2.h,),
-              AppTextFieldTitle(text: "userRole".tr, isRequired: true),
-              AppDropDownWidget(selectedValue: controller.selectedRole, values: controller.roles, onSelect: (r) => controller.selectRole(r)),
-               SizedBox(height: 6.h,),
-               Visibility(
-                visible: widgetState == WidgetState.loading,
-                 replacement: AppButtonWidget(text: 'addUser'.tr, onPressed: (){
-                  if(controller.selectedRole == null){
-                    AppSnackbar.show( message: "select user's role" ,error: true);
-                  } else if(_useFormKey.currentState!.validate()){
-                        controller.addUser();
-                      }}),
-                child: const LoadingWidget(),
-               ),
-             ],
-          ),
-        ),
-      );}
-     ) ;
+              ),
+            );}
+      ),
+    ) ;
   }
 
 }

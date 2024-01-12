@@ -7,33 +7,45 @@ List<Product> productFromJson(List str) => List<Product>.from(str.map((x) => Pro
 String productToJson(Product data) => json.encode(data.toJson());
 
 class Product {
+    String type;
+    String inOut;
     String name;
     String mainType;
-    String subType;
-    int price;
+    int invoiceNumber;
     int quantity;
+    String date;
+    String empName;
 
     Product({
+        required this.date,
+        required this.inOut,
+        required this.type,
         required this.name,
         required this.mainType,
-        required this.subType,
-        required this.price,
+        required this.invoiceNumber,
         required this.quantity,
+        required this.empName
     });
 
     factory Product.fromJson(Map<String, dynamic> json) => Product(
         name: json["name"]??"",
         mainType: json["mainType"]??"",
-        subType: json["subType"]??"",
-        price: json["price"]??0,
+        invoiceNumber: json["invoiceNumber"]??0,
         quantity: json["quantity"]??0,
+        inOut: json["inOut"]??"",
+        type: json["type"]??"",
+        date: json["date"]??"",
+        empName: json["empName"]
     );
 
     Map<String, dynamic> toJson() => {
+        "type": type,
+        "inOut": inOut,
         "name": name,
         "mainType": mainType,
-        "subType": subType,
-        "price": price,
+        "invoiceNumber": invoiceNumber,
         "quantity": quantity,
+        "date": date,
+        "empName": empName
     };
 }

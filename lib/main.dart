@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import 'features/admin/add_user_tab/add_user_tab_binding.dart';
+import 'features/admin/add_user_tab/add_user_tab_view.dart';
 import 'features/admin/admin_binding.dart';
 
 part 'package:cleanning_store_app/core/routing/app_pages.dart';

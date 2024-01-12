@@ -52,16 +52,16 @@ class CardProduct extends StatelessWidget {
           fontSize: 16.sp,
           fontWeight: FontWeight.bold),
         ),
-        subtitle: Padding(
-          padding: EdgeInsets.only(top: 0.5.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(product.mainType,style: TextStyle(fontSize: 12.sp, color: AppColors.whiteColor)),
-              Text(product.subType,style: TextStyle(fontSize: 12.sp, color: AppColors.whiteColor)),
-            ],
-          ),
-        ),
+        // subtitle: Padding(
+        //   padding: EdgeInsets.only(top: 0.5.h),
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       Text(product.mainType,style: TextStyle(fontSize: 12.sp, color: AppColors.whiteColor)),
+        //       Text(product.subType,style: TextStyle(fontSize: 12.sp, color: AppColors.whiteColor)),
+        //     ],
+        //   ),
+        // ),
         trailing:
             Container(
               padding: EdgeInsets.only(top: 0.5.h),
@@ -75,7 +75,7 @@ class CardProduct extends StatelessWidget {
                     children: [
                      const Icon(Icons.attach_money , color: Colors.yellow,),
                      SizedBox(width: 1.w,),
-                    Text('${product.price} UAE' , style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    Text('${product.invoiceNumber} UAE' , style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.whiteColor,
                     ),),
                     ],

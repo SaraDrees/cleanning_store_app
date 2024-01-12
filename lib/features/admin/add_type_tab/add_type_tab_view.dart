@@ -39,7 +39,9 @@ class AddTypeTabView extends GetView<AddTypeTabController>{
                SizedBox(height: 6.h,),
                Visibility(
                 visible: widgetState == WidgetState.loading,
-                 replacement: AppButtonWidget(text: 'addType'.tr, onPressed: (){
+                 replacement: AppButtonWidget(
+                   color: Color(0xff2BC990),
+                     text: 'addType'.tr, onPressed: (){
                   // if(controller.selectedType == null){
                   //   AppSnackbar.show( message: "selectUserType".tr ,error: true);
                   // } else 

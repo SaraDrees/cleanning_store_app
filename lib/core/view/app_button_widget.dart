@@ -4,8 +4,8 @@ import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
 class AppButtonWidget extends StatelessWidget {
-   AppButtonWidget({this.height, this.width , required this.text ,required this.onPressed ,super.key});
-
+   AppButtonWidget({this.height, this.width ,required this.color, required this.text ,required this.onPressed ,super.key});
+   Color color;
   double ? height,width;
   String text;
   final Function() onPressed ;
@@ -13,13 +13,13 @@ class AppButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
-                width: width??double.infinity,
+                width: 150,
                 height: height?? 6.5.h,
                 child: ElevatedButton(
                   onPressed:() => onPressed(),
                  style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  backgroundColor: AppColors.colorPrimary,
+                  backgroundColor: color,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32))
                  ),
                   child: Text(

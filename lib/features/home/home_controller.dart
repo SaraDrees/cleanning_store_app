@@ -13,17 +13,17 @@ class HomeController extends GetxStateController{
 HomeController({required this.firebaseStore});
 
 productType ?selectedMainType ;
-productType? selectedSubType;
+productType? selectedName;
 
 List<productType> mainTypes = [] ;
-List<productType> subTypes = [] ;
+List<productType> name = [] ;
 
 
 FirebaseStoreManager firebaseStore;
 Product? newProduct ;
 
 TextEditingController nameController = TextEditingController();
-TextEditingController priceController = TextEditingController();
+TextEditingController invoiceNumberController = TextEditingController();
 TextEditingController quantityController = TextEditingController();
 
 @override
@@ -31,9 +31,9 @@ TextEditingController quantityController = TextEditingController();
     // TODO: implement onInit
     await getMainTypes();
     selectedMainType = mainTypes.first;
-    selectedSubType = subTypes.first;
+    selectedName = name.first;
     nameController.text = newProduct?.name??"";
-    priceController.text = newProduct?.price.toString()??"";
+    invoiceNumberController.text = newProduct?.invoiceNumber.toString()??"";
     quantityController.text = newProduct?.quantity.toString()??"";
     super.onInit();
   }
@@ -46,19 +46,24 @@ void selectMainType(productType value){
 }
 
 void selectSubType(productType value){
-  selectedSubType = value ; 
+  selectedName = value ;
   update(['subType']);
 }
 
-Future addProduct() async {
+Future addProduct({required String inOut}) async {
   requestMethod(ids: ['new_product'],
   requestType: RequestType.postData, 
   function: () async {
-    newProduct = Product(name: nameController.text,
+    newProduct = Product(
+        empName: "othman",
+        type: "",
+        inOut: inOut,
         mainType: selectedMainType?.name??"",
-        subType: selectedSubType?.name??"",
-        price: int.parse( priceController.text),
-        quantity: int.parse( quantityController.text));
+        name: selectedName?.name??"",
+        invoiceNumber: int.parse( invoiceNumberController.text),
+        quantity: int.parse( quantityController.text),
+        date: DateTime.now().toString()
+    );
     await firebaseStore.addData( data:newProduct?.toJson(), 
     collectionPath: Constant.productCollectionPath,
     message: 'productAdded'.tr, errorMessage: 'FailedToAddProduct'.tr
@@ -68,6 +73,7 @@ Future addProduct() async {
       });
  
 }
+
 
 Future getMainTypes() async {
   requestMethod(ids: ['mainType'],
@@ -85,9 +91,9 @@ Future getSubTypes(String mainTypeId) async {
   requestType: RequestType.getData, 
   function: () async {
   QuerySnapshot result = await firebaseStore.getData('${Constant.mainTypeCollectionPath}/$mainTypeId/${Constant.subTypeCollectionPath}');
-  subTypes.clear();
-  subTypes.addAll(productTypeFromJson(result.docs));
-  selectedSubType = null;
+  name.clear();
+  name.addAll(productTypeFromJson(result.docs));
+  selectedName = null;
     return null ;
       });
 }
@@ -95,10 +101,10 @@ Future getSubTypes(String mainTypeId) async {
 void clearData(){
     newProduct = null ;
     nameController.text = '' ;
-    priceController.text = '';
+    invoiceNumberController.text = '';
     quantityController.text = '';
     selectedMainType = null;
-    selectedSubType = null;
+    selectedName = null;
     update(['new_product']);
   }
 

@@ -19,15 +19,19 @@ class ProductsTabController extends GetxStateController{
   }
 
    void getProduct() async {
-    requestMethod(
-        ids: ["products"],
-        requestType: RequestType.getData,
-        function: () async {
-          QuerySnapshot products = await firebaseStore.getData("product");
-          data.addAll(productFromJson((products.docs.map((e) => e.data() as Map<String, dynamic>? ).toList())));
-          update(['products']);
-          return null;
-        });
+    try{
+      requestMethod(
+          ids: ["products"],
+          requestType: RequestType.getData,
+          function: () async {
+            QuerySnapshot products = await firebaseStore.getData("product");
+            data.addAll(productFromJson((products.docs.map((e) => e.data() as Map<String, dynamic>? ).toList())));
+            update(['products']);
+            return null;
+          });
+    }catch(e){
+      print("sssssssssssssssssssssssssssssssssssssssssssssssssssssssss     $e" );
+    }
   
 
   }
