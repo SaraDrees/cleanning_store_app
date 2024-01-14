@@ -63,15 +63,30 @@ class _AppDrawerState extends State<AppDrawer> {
           child: Column(
             children: [
                 MenuItemWidget(
-                  title: "homePage".tr,
-                  iconData: Icons.home,
+                  title: "storPage".tr,
+                  iconData: Icons.store,
                   index: 0,
                   onClick: () {
                     Get.currentRoute == AppRoutes.adminPageRoute? null :
                     Get.offAndToNamed(AppRoutes.adminPageRoute);
                   }),
-
+              MenuItemWidget(
+                  title: "primaryPage".tr,
+                  iconData: Icons.add_card_outlined,
+                  index: 0,
+                  onClick: () {
+                    Get.currentRoute == AppRoutes.adminPrimaryRoute? null :
+                    Get.offAndToNamed(AppRoutes.adminPrimaryRoute);
+                  }),
                   MenuItemWidget(
+                  title: "addProduct".tr,
+                  iconData: Icons.account_tree_rounded,
+                  index: 0,
+                  onClick: () {
+                    Get.currentRoute == AppRoutes.addProduct? null :
+                    Get.offAndToNamed(AppRoutes.addProduct);
+                  }),
+              MenuItemWidget(
                   title: "addUser".tr,
                   iconData: Icons.person_add,
                   index: 0,
@@ -79,6 +94,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     Get.currentRoute == AppRoutes.addUser? null :
                     Get.offAndToNamed(AppRoutes.addUser);
                   }),
+
                
               const Expanded(child: SizedBox() ),
               Padding(

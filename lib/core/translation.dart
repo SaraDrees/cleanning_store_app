@@ -5,6 +5,9 @@ class Translation extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en_US': {
           'login': 'Log in',
+          'type': 'Type',
+          'storPage':'Stor Page',
+          'primaryPage':'Primary Page',
           'password': 'Your Password',
           'nameHint' : 'Your Name',
           'thisFiledIsRequired':'This filed is required.',

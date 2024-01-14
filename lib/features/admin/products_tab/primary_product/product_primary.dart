@@ -1,23 +1,25 @@
 import 'package:cleanning_store_app/core/app_colors.dart';
 import 'package:cleanning_store_app/features/admin/add_type_tab/add_type_tab_view.dart';
 import 'package:cleanning_store_app/features/admin/add_user_tab/add_user_tab_view.dart';
+import 'package:cleanning_store_app/features/admin/products_tab/finished_product/tap-in_s.dart';
+import 'package:cleanning_store_app/features/admin/products_tab/finished_product/tap-out_s.dart';
+import 'package:cleanning_store_app/features/admin/products_tab/primary_product/tap_in.dart';
+import 'package:cleanning_store_app/features/admin/products_tab/primary_product/tap_out.dart';
 import 'package:cleanning_store_app/features/admin/products_tab/products_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'finished_product/tap-in_s.dart';
-import 'finished_product/tap-out_s.dart';
 
 
 
-class ProductsTabView extends StatefulWidget {
-  const ProductsTabView({super.key});
+class ProductsTabViewPrimary extends StatefulWidget {
+  const ProductsTabViewPrimary({super.key});
 
   @override
-  State<ProductsTabView> createState() => _ProductsTabViewState();
+  State<ProductsTabViewPrimary> createState() => _ProductsTabViewPrimaryState();
 }
 
-class _ProductsTabViewState extends State<ProductsTabView> with TickerProviderStateMixin {
+class _ProductsTabViewPrimaryState extends State<ProductsTabViewPrimary> with TickerProviderStateMixin {
 
   late TabController tabController ;
 
@@ -50,10 +52,11 @@ class _ProductsTabViewState extends State<ProductsTabView> with TickerProviderSt
           body:  TabBarView(
             // controller: tabController,
             children:  [
-              ProductsTabViewIS(),
-              ProductsTabViewOS(),
+              ProductsTabViewIP(),
+              ProductsTabViewOP(),
             ],
           ),
+
 
         ));
   }

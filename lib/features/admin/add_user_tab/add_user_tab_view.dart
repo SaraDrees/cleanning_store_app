@@ -21,6 +21,7 @@ class AddUserTabView extends GetView<AddUserTabController>{
   @override
   Widget build(BuildContext context) {
     return MainScaffold(
+
       title: 'addUser'.tr,
       body: StateBuilder<AddUserTabController>(
           id: "addUser",

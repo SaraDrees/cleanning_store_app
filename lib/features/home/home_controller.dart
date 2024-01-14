@@ -14,9 +14,12 @@ HomeController({required this.firebaseStore});
 
 productType ?selectedMainType ;
 productType? selectedName;
+String? selectedType ;
+
 
 List<productType> mainTypes = [] ;
 List<productType> name = [] ;
+List<String> type = ["Primary product" , "Finished product"] ;
 
 
 FirebaseStoreManager firebaseStore;
@@ -30,6 +33,7 @@ TextEditingController quantityController = TextEditingController();
   void onInit() async {
     // TODO: implement onInit
     await getMainTypes();
+    selectedType="";
     selectedMainType = mainTypes.first;
     selectedName = name.first;
     nameController.text = newProduct?.name??"";
@@ -45,6 +49,12 @@ void selectMainType(productType value){
   update(['mainType']);
 }
 
+void selectType(String value){
+  selectedType = value ;
+  //get subType by mainTypeId
+  update(['type']);
+}
+
 void selectSubType(productType value){
   selectedName = value ;
   update(['subType']);
@@ -55,8 +65,8 @@ Future addProduct({required String inOut}) async {
   requestType: RequestType.postData, 
   function: () async {
     newProduct = Product(
-        empName: "othman",
-        type: "",
+        empName: Constant.empName,
+        type: selectedType??"",
         inOut: inOut,
         mainType: selectedMainType?.name??"",
         name: selectedName?.name??"",

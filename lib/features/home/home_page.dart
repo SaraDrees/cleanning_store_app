@@ -12,120 +12,168 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
-class HomePage extends GetView<HomeController>{
-
+class HomePage extends GetView<HomeController> {
   final _formKey = GlobalKey<FormState>();
 
   HomePage({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(vertical: 9.h , horizontal: 5.3.w),
-        child: StateBuilder<HomeController>(
-          id: 'new_product',
-          disableState: true,
-          initialWidgetState: WidgetState.loaded,
-          builder: (widgetState, controller){
-            return Form(
-              key: _formKey,
-              child: Column(
+          padding: EdgeInsets.symmetric(vertical: 9.h, horizontal: 5.3.w),
+          child: StateBuilder<HomeController>(
+              id: 'new_product',
+              disableState: true,
+              initialWidgetState: WidgetState.loaded,
+              builder: (widgetState, controller) {
+                return Form(
+                  key: _formKey,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Center(
                         child: Text(
-                        'addProduct'.tr,
-                        style: TextStyle(
-                        color: AppColors.colorPrimary,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w700,
-                        ),
+                          'addProduct'.tr,
+                          style: TextStyle(
+                            color: AppColors.colorPrimary,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
-                      SizedBox(height: 3.5.h,),
+                      SizedBox(
+                        height: 3.5.h,
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: AppTextFieldTitle( text:"mainType".tr, isRequired: true,),
+                        child: AppTextFieldTitle(
+                          text: "type".tr,
+                          isRequired: true,
+                        ),
                       ),
                       StateBuilder<HomeController>(
-                        id: 'mainType',
-                        builder: (widgetState, controller) {
-                          return AppDropDownWidget(selectedValue: controller.selectedMainType, values: controller.mainTypes,
-                           onSelect: (value) => controller.selectMainType(value));
-                        }
-                      ),
-                      SizedBox(height: 1.5.h,),
+                          id: 'type',
+                          initialWidgetState: WidgetState.loaded,
+                          builder: (widgetState, controller) {
+                            return AppDropDownWidget(
+                                selectedValue: controller.selectedType,
+                                values: controller.type,
+                                onSelect: (value) =>
+                                    controller.selectType(value));
+                          }),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: AppTextFieldTitle( text:"name".tr, isRequired: true,),
+                        child: AppTextFieldTitle(
+                          text: "mainType".tr,
+                          isRequired: true,
+                        ),
                       ),
                       StateBuilder<HomeController>(
-                        id: 'subType',
-                        initialWidgetState: WidgetState.disable,
-                        builder: (widgetState, controller) {
-                          return AppDropDownWidget(selectedValue: controller.selectedName, values: controller.name,
-                           onSelect: (value) => controller.selectSubType(value));
-                        }
+                          id: 'mainType',
+                          builder: (widgetState, controller) {
+                            return AppDropDownWidget(
+                                selectedValue: controller.selectedMainType,
+                                values: controller.mainTypes,
+                                onSelect: (value) =>
+                                    controller.selectMainType(value));
+                          }),
+                      SizedBox(
+                        height: 1.5.h,
                       ),
-                      SizedBox(height: 1.5.h,),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: AppTextFieldTitle(
+                          text: "name".tr,
+                          isRequired: true,
+                        ),
+                      ),
+                      StateBuilder<HomeController>(
+                          id: 'subType',
+                          initialWidgetState: WidgetState.disable,
+                          builder: (widgetState, controller) {
+                            return AppDropDownWidget(
+                                selectedValue: controller.selectedName,
+                                values: controller.name,
+                                onSelect: (value) =>
+                                    controller.selectSubType(value));
+                          }),
+                      SizedBox(
+                        height: 1.5.h,
+                      ),
                       // Padding(
                       //   padding: EdgeInsets.symmetric(horizontal: 5.w),
                       //   child: AppTextFieldTitle( text:"productName".tr, isRequired: true,),
                       // ),
                       // AppTextField(controller: controller.nameController, validator: (value) => filedRequired(value),),
-                      SizedBox(height: 1.5.h,),
+                      SizedBox(
+                        height: 1.5.h,
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: AppTextFieldTitle( text:"quantity".tr, isRequired: true,),
+                        child: AppTextFieldTitle(
+                          text: "quantity".tr,
+                          isRequired: true,
+                        ),
                       ),
-                      AppTextField(controller: controller.quantityController, validator: (value) => validateNumbers(value??""),
-                      keyboardType: TextInputType.number,
+                      AppTextField(
+                        controller: controller.quantityController,
+                        validator: (value) => validateNumbers(value ?? ""),
+                        keyboardType: TextInputType.number,
                       ),
-                      SizedBox(height: 1.5.h,),
+                      SizedBox(
+                        height: 1.5.h,
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: AppTextFieldTitle( text:"price".tr, isRequired: true,),
+                        child: AppTextFieldTitle(
+                          text: "price".tr,
+                          isRequired: true,
+                        ),
                       ),
-                      AppTextField(controller: controller.invoiceNumberController, validator: (value) => validateNumbers(value??""),
-                      keyboardType: TextInputType.number,
+                      AppTextField(
+                        controller: controller.invoiceNumberController,
+                        validator: (value) => validateNumbers(value ?? ""),
+                        keyboardType: TextInputType.number,
                       ),
-                      SizedBox(height: 3.5.h,),
+                      SizedBox(
+                        height: 3.5.h,
+                      ),
 
-                          Visibility(
-                            visible: widgetState == WidgetState.loading,
-                            replacement: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                AppButtonWidget(
-                                    color: Color(0xff2BC990),
-                                    text: 'input'.tr, onPressed: ()async {
-                                  if(_formKey.currentState!.validate() && controller.selectedMainType != null
-                                      && controller.selectedName != null){
+                      Visibility(
+                        visible: widgetState == WidgetState.loading,
+                        replacement: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            AppButtonWidget(
+                                color: Color(0xff2BC990),
+                                text: 'input'.tr,
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate() &&
+                                      controller.selectedMainType != null &&
+                                      controller.selectedName != null) {
                                     await controller.addProduct(inOut: "in");
                                   }
                                 }),
-                                AppButtonWidget(
-                                    color: Color(0xffff5969),
-                                    text: 'output'.tr, onPressed: ()async {
-                                  if(_formKey.currentState!.validate() && controller.selectedMainType != null
-                                      && controller.selectedName != null){
+                            AppButtonWidget(
+                                color: Color(0xffff5969),
+                                text: 'output'.tr,
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate() &&
+                                      controller.selectedMainType != null &&
+                                      controller.selectedName != null) {
                                     await controller.addProduct(inOut: "out");
                                   }
                                 }),
-                              ],
-                            ),
-                            child: const LoadingWidget(),
-                          ),
+                          ],
+                        ),
+                        child: const LoadingWidget(),
+                      ),
                     ],
                   ),
-            );
-          }
-        )
-      ),
+                );
+              })),
     );
   }
-
 }

@@ -32,6 +32,20 @@ class _AppPages {
       binding: AdminBinding(),
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)
+    ),
+    GetPage(
+        name: AppRoutes.adminPrimaryRoute,
+        page: () => AdminPrimary(),
+        binding: AdminBinding(),
+        transition: Transition.fadeIn,
+        transitionDuration: const Duration(milliseconds: 500)
+    ),
+    GetPage(
+        name: AppRoutes.addProduct,
+        page: () => AddTypeTabView(),
+        binding: AdminBinding(),
+        transition: Transition.fadeIn,
+        transitionDuration: const Duration(milliseconds: 500)
     )
   ];
 }

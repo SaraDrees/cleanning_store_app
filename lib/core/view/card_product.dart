@@ -6,10 +6,11 @@ import 'package:sizer/sizer.dart';
 // ignore: must_be_immutable
 class CardProduct extends StatelessWidget {
 
-  CardProduct({super.key, required this.product, required this.index});
+  CardProduct({super.key,required this.color, required this.product, required this.index});
 
   Product product ;
   int index;
+  Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class CardProduct extends StatelessWidget {
       color: Colors.transparent,
       margin: EdgeInsets.symmetric(horizontal: 2.8.w),
       child: Container(
-        decoration:  BoxDecoration(color: AppColors.colorPrimary,
+        decoration:  BoxDecoration(color: color,
         borderRadius: BorderRadius.circular(10)),
         child: _buildListTile(context),
       ),
@@ -34,7 +35,10 @@ class CardProduct extends StatelessWidget {
           padding: EdgeInsets.only(right: 3.w),
           decoration: BoxDecoration(
               border: Border(
-                  right: BorderSide(width: 1.0, color: AppColors.whiteColor))),
+                  right: BorderSide(
+                      width: 1.0,
+                      color: AppColors.whiteColor
+                  ))),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -45,6 +49,28 @@ class CardProduct extends StatelessWidget {
               ),),
             ],
           ),
+        ),
+        subtitle: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 2.h,),
+            Text("Invoice: 12345789",style: TextStyle(color: AppColors.whiteColor,
+               ),),
+
+            Row(
+              children: [
+
+                Text("User: othman",style: TextStyle(color: AppColors.whiteColor,
+                  ),),
+                SizedBox(width: 5.w,),
+                Text("1/1/2025",style: TextStyle(color: AppColors.whiteColor,
+                    ),),
+
+
+              ],
+            )
+          ],
         ),
         title: Text(
           product.name,
@@ -70,24 +96,14 @@ class CardProduct extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                     const Icon(Icons.attach_money , color: Colors.yellow,),
-                     SizedBox(width: 1.w,),
-                    Text('${product.invoiceNumber} UAE' , style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.whiteColor,
-                    ),),
-                    ],
-                  ),
-                      SizedBox(height: 0.1.h,),
+
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(width: 1.w,),
                      const Icon(Icons.auto_awesome_motion_outlined , color: Colors.yellow, size: 22,),
                      SizedBox(width: 1.w,),
-                    Text('${product.quantity} Piece' , style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    Text('${product.quantity} item' , style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.whiteColor
                     ),),
                     ],

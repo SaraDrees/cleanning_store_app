@@ -15,7 +15,7 @@ class LoginController extends GetxStateController{
   User? user ;
   List<User> users = [];
   FirebaseStoreManager firebaseStore;
-
+  String empName="";
 
   @override
   void onInit() {

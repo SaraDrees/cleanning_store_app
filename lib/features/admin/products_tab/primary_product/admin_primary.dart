@@ -1,22 +1,23 @@
 import 'package:cleanning_store_app/core/view/main_scaffold.dart';
+import 'package:cleanning_store_app/features/admin/products_tab/primary_product/product_primary.dart';
 import 'package:cleanning_store_app/features/admin/products_tab/products_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
 
-class AdminPage extends StatefulWidget {
-  const AdminPage({super.key});
+class AdminPrimary extends StatefulWidget {
+  const AdminPrimary({super.key});
 
   @override
-  State<AdminPage> createState() => _AdminPageState();
+  State<AdminPrimary> createState() => _AdminPrimaryState();
 }
 
-class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
- 
- late TabController tabController ;
+class _AdminPrimaryState extends State<AdminPrimary> with TickerProviderStateMixin {
 
- @override
+  late TabController tabController ;
+
+  @override
   void initState() {
     tabController = TabController(length: 3, vsync: this);
     super.initState();
@@ -27,9 +28,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
     return DefaultTabController(
         length: 3,
         child: MainScaffold(
-        body:  ProductsTabView(),
-         title: 'products'.tr,) );
+          body:  ProductsTabViewPrimary(),
+          title: 'products'.tr,) );
   }
-
-
 }

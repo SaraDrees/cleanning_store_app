@@ -1,5 +1,6 @@
 import 'package:cleanning_store_app/core/app_colors.dart';
 import 'package:cleanning_store_app/core/assets.dart';
+import 'package:cleanning_store_app/core/constant.dart';
 import 'package:cleanning_store_app/core/models/user_model.dart';
 import 'package:cleanning_store_app/core/utitlities.dart';
 import 'package:cleanning_store_app/core/view/app_button_widget.dart';
@@ -68,6 +69,7 @@ class LoginPage extends GetView<LoginController>{
                  builder: (widgetState, controller) {
                    return AppButtonWidget(color:Color(0xff2BC990) , text: 'login'.tr, onPressed: (){
                         if(_formKey.currentState!.validate()){
+                          Constant.empName=nameController.text;
                           controller.user = User(name: nameController.text, 
                           password: passwordController.text);
                          controller.login();

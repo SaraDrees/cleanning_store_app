@@ -10,6 +10,7 @@ class Constant {
   static const subTypeCollectionPath = "name" ;
   static const String en = "en_US" ;
   static const String ar = "ar" ;
+  static  String empName="";
 
 
 }
