@@ -17,7 +17,7 @@ class productType {
 
   factory productType.fromJson(QueryDocumentSnapshot snapshot) => productType(
     id: snapshot.reference.id,
-    name: snapshot['name'],
+    name: snapshot['name']??"",
     // type: json['type']
   );
 

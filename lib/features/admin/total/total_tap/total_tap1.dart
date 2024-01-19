@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../total_controller.dart';
+
 class TotalTap1View extends GetView<ProductsTabController>{
   const TotalTap1View({super.key});
 
@@ -16,16 +18,18 @@ class TotalTap1View extends GetView<ProductsTabController>{
         builder: (widgetState, controller) {
           return Padding(
             padding: EdgeInsets.only(top: 3.h),
-            child: ListView.separated(
-                separatorBuilder: (cnt,i){
-                  return Container(
-                    height: 1.5.h,
-                  );
-                },
-                itemCount: controller.data.length,
-                itemBuilder: (context,i){
-                  return CardTotal(product: controller.data[i],color: Colors.blueGrey,);
-                }),
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+              ),
+              itemCount: 20,
+              itemBuilder: (BuildContext context, int index) {
+
+                return CardTotal();
+              },
+            ),
           );}
     ) ;
   }

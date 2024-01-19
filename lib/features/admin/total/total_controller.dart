@@ -7,14 +7,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../core/models/type_model.dart';
 
-class ProductsTabController extends GetxStateController{
-  ProductsTabController({required this.firebaseStore});
+class TotalController extends GetxStateController{
+  TotalController({required this.firebaseStore});
 
   FirebaseStoreManager firebaseStore;
 
   late List<Product> data ;
-  late List<productType> mainType;
-  late List<ProductName> names;
+  late List mainType;
+  late List names;
+  late List <ProductName> productName;
+  var totalIn=0;
+  var i=0;
+  var totalOut=0;
+  Map<String,dynamic> s={};
 
   @override
   void onInit() {
@@ -22,10 +27,11 @@ class ProductsTabController extends GetxStateController{
     data = [];
     mainType=[];
     names=[];
-    getProduct();
+    productName=[];
+    getProductt();
   }
 
-  void getProduct() async {
+  void getProductt() async {
     try{
       requestMethod(
           ids: ["total"],
@@ -33,11 +39,30 @@ class ProductsTabController extends GetxStateController{
           function: () async {
             QuerySnapshot products = await firebaseStore.getData("product");
             data.addAll(productFromJson((products.docs.map((e) => e.data() as Map<String, dynamic>? ).toList())));
-            QuerySnapshot mainType1 = await firebaseStore.getData("mainType");
-            mainType.addAll(productTypeFromJson((mainType1.docs.map((e) => e.data() as Map<String, dynamic>? ).toList())));
-            QuerySnapshot products1 = await FirebaseFirestore.instance.collection("mainType").doc("7ZWH3DcV2ytay1IErytK").collection("name").get();
-            names.addAll(productNameFromJson((products1.docs.map((e) => e.data() as Map<String, dynamic>? ).toList())));
-            print("sssssssssssssssssssssssssssssssssssssssssssssssss ${names[1]}");
+            var mainType1 = await firebaseStore.getData("mainType");
+            mainType.addAll(mainType1.docs.map((e) => e.id));
+            mainType.forEach((element) async{
+              QuerySnapshot names1 = await FirebaseFirestore.instance.collection("mainType").doc(element).collection("name").get();
+              names.addAll(names1.docs.map((e) => e.data()));
+            });
+            names.forEach((n) {
+              data.forEach((d) {
+                if(n['name']==d.name&&d.inOut=="in")
+                  {
+                    totalIn+=d.quantity;
+                  }
+                if(n['name']==d.name&&d.inOut=="out")
+                {
+                  totalOut+=d.quantity;
+                }
+              });
+              print("sssssssssssssssssssssssssssssssssssssssssssssss ${names[i]['name']}");
+              i++;
+              s.addAll({"name":n,"total":totalIn-totalOut});
+              //productName.add(ProductName.fromJson(s));
+              totalIn=0;
+              totalOut=0;
+            });
 
             update(['total']);
             return null;

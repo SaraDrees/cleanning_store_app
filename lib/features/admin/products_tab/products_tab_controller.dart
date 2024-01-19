@@ -1,8 +1,10 @@
 import 'package:cleanning_store_app/core/firebase_store_manager.dart';
 import 'package:cleanning_store_app/core/models/product_model.dart';
 import 'package:cleanning_store_app/core/models/product_name.dart';
+import 'package:cleanning_store_app/core/models/type_model.dart';
 import 'package:cleanning_store_app/core/request_mixin.dart';
 import 'package:cleanning_store_app/core/state_mixin.dart';
+import 'package:cleanning_store_app/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
@@ -21,6 +23,7 @@ class ProductsTabController extends GetxStateController{
   late List<List<dynamic>> dataList;
 
 
+
   @override
   void onInit() {
     super.onInit();
@@ -32,6 +35,7 @@ class ProductsTabController extends GetxStateController{
     dataList=[];
 
     getProduct();
+
   }
 
    void getProduct() async {
@@ -40,6 +44,14 @@ class ProductsTabController extends GetxStateController{
           ids: ["products"],
           requestType: RequestType.getData,
           function: () async {
+
+            // var mainType1 = await firebaseStore.getData("mainType");
+            // mainType.addAll(mainType1.docs.map((e) => e.id));
+            // mainType.forEach((element) async{
+            //   QuerySnapshot names1 = await FirebaseFirestore.instance.collection("mainType").doc(element).collection("name").get();
+            //   names.addAll(names1.docs.map((e) => e.data()));
+            //
+            // });
             QuerySnapshot products = await firebaseStore.getData("product");
             data.addAll(productFromJson((products.docs.map((e) => e.data() as Map<String, dynamic>? ).toList())));
             data.forEach((element) {
@@ -58,16 +70,16 @@ class ProductsTabController extends GetxStateController{
               if(element.inOut=="out"&&element.type=="Primary product")
                 outPData.add(element);
             });
+            fillData();
             update(['products']);
             return null;
           });
-      fillData();
+
     }catch(e){
     }
   
 
   }
-
 
 
   Future<void> exportCSV() async {
@@ -88,5 +100,10 @@ class ProductsTabController extends GetxStateController{
   fillData(){
     dataList =[["Type","Main Type","name","Quantity","invoiceNumber","Date","Emp Name"],data.map((pr) => [pr.type, pr.mainType,pr.name,pr.quantity,pr.invoiceNumber,pr.date,pr.empName]).toList()];
   }
+
+
+
+
+
 
 }

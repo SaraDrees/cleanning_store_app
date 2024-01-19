@@ -54,17 +54,17 @@ class CardProduct extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 2.h,),
-            Text("Invoice: 12345789",style: TextStyle(color: AppColors.whiteColor,
+            SizedBox(height: 1.h,),
+            Text("Invoice: ${product.invoiceNumber}",style: TextStyle(color: AppColors.whiteColor,
                ),),
 
             Row(
               children: [
 
-                Text("User: othman",style: TextStyle(color: AppColors.whiteColor,
+                Text("User: ${product.empName}",style: TextStyle(color: AppColors.whiteColor,
                   ),),
                 SizedBox(width: 5.w,),
-                Text("1/1/2025",style: TextStyle(color: AppColors.whiteColor,
+                Text("${product.date}",style: TextStyle(color: AppColors.whiteColor,
                     ),),
 
 

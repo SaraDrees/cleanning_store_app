@@ -3,23 +3,29 @@ import 'package:cleanning_store_app/core/firebase_store_manager.dart';
 import 'package:cleanning_store_app/core/models/type_model.dart';
 import 'package:cleanning_store_app/core/request_mixin.dart';
 import 'package:cleanning_store_app/core/state_mixin.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddTypeTabController extends GetxStateController{
-  AddTypeTabController({required this.firebaseStore});
+class AddTypeController extends GetxStateController{
+  AddTypeController({required this.firebaseStore});
 
   FirebaseStoreManager firebaseStore;
   productType ?type;
   TextEditingController typeController = TextEditingController();
   List<String> types = ['mainType'.tr,'subType'.tr];
   String? selectedType ;
+  List<productType> mainTypes = [] ;
+  productType ?selectedMainType ;
 
 
   @override
-  void onInit() {
+  void onInit()async {
+    await getMainTypes();
     typeController.text = type?.name??"";
+    selectedMainType = mainTypes.first;
     super.onInit();
+
   }
 
   void addType() async {
@@ -50,6 +56,23 @@ class AddTypeTabController extends GetxStateController{
     update(['addType']);
   }
 
+
+  void selectMainType(productType value){
+    selectedMainType = value ;
+    //get subType by mainTypeId
+    update(['addType']);
+  }
+
+  Future getMainTypes() async {
+    requestMethod(ids: ['addType'],
+        requestType: RequestType.getData,
+        function: () async {
+          QuerySnapshot result = await firebaseStore.getData(Constant.mainTypeCollectionPath);
+          mainTypes.clear();
+          mainTypes.addAll(productTypeFromJson(result.docs));
+          return null ;
+        });
+  }
 
 
 }

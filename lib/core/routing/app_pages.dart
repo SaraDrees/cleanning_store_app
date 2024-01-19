@@ -42,7 +42,14 @@ class _AppPages {
     ),
     GetPage(
         name: AppRoutes.addProduct,
-        page: () => AddTypeTabView(),
+        page: () => AddTypeView(),
+        binding: AddTypeBinding(),
+        transition: Transition.fadeIn,
+        transitionDuration: const Duration(milliseconds: 500)
+    ),
+    GetPage(
+        name: AppRoutes.totalRoute,
+        page: () => TotalView(),
         binding: AdminBinding(),
         transition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 500)

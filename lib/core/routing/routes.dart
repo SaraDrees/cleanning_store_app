@@ -8,6 +8,7 @@ class AppRoutes {
   static const String inSide = '/inSideRoute';
   static const String outSide = '/outSideRoute';
   static const String adminPrimaryRoute = '/AdminPrimaryRoute';
+  static const String totalRoute = '/TotalRoute';
 
 
 

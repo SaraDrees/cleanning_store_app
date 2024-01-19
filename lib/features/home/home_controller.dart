@@ -64,6 +64,7 @@ Future addProduct({required String inOut}) async {
   requestMethod(ids: ['new_product'],
   requestType: RequestType.postData, 
   function: () async {
+
     newProduct = Product(
         empName: Constant.empName,
         type: selectedType??"",
@@ -72,7 +73,7 @@ Future addProduct({required String inOut}) async {
         name: selectedName?.name??"",
         invoiceNumber: int.parse( invoiceNumberController.text),
         quantity: int.parse( quantityController.text),
-        date: DateTime.now().toString()
+        date: "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}"
     );
     await firebaseStore.addData( data:newProduct?.toJson(), 
     collectionPath: Constant.productCollectionPath,

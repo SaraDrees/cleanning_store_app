@@ -1,8 +1,10 @@
 import 'package:cleanning_store_app/features/admin/add_type_tab/add_type_tab_binding.dart';
 import 'package:cleanning_store_app/features/admin/add_user_tab/add_user_tab_binding.dart';
 import 'package:cleanning_store_app/features/admin/products_tab/products_tab_binding.dart';
+import 'package:cleanning_store_app/features/admin/total/total_binding.dart';
 import 'package:get/get.dart';
 
+import '../home/home_binding.dart';
 import 'admin_controller.dart';
 
 class AdminBinding extends Bindings{
@@ -12,6 +14,7 @@ class AdminBinding extends Bindings{
     Get.lazyPut(() => AdminController());
     ProductsTabBinding().dependencies();
     AddUserTabBinding().dependencies();
-    AddTypeTabBinding().dependencies();
+    AddTypeBinding().dependencies();
+    //TotalBinding().dependencies();
   }
 }

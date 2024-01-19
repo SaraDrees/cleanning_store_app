@@ -32,6 +32,7 @@ class ProductsTabViewIS extends GetView<ProductsTabController>{
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           controller.exportCSV();
+
         },
         child: Icon(Icons.file_download),
       ),

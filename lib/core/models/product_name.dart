@@ -4,25 +4,25 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductName {
-  String ?id ;
   String name;
+  int total;
   // String type;
 
   ProductName({
-    this.id,
+    required this.total,
     required this.name,
     // required this.type
-
   });
 
-  factory ProductName.fromJson(QueryDocumentSnapshot snapshot) => ProductName(
-    id: snapshot.reference.id,
+  factory ProductName.fromJson(Map<String, dynamic> snapshot) => ProductName(
     name: snapshot['name']??"",
+    total: snapshot['total']
     // type: json['type']
   );
 
   Map<String, dynamic> toJson() => {
     "name": name,
+    "total":total
     // 'type' : type
   };
 }
