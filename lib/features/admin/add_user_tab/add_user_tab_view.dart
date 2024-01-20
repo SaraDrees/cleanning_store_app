@@ -1,3 +1,4 @@
+import 'package:cleanning_store_app/core/app_colors.dart';
 import 'package:cleanning_store_app/core/utitlities.dart';
 import 'package:cleanning_store_app/core/view/app_button_widget.dart';
 import 'package:cleanning_store_app/core/view/app_dropDown_widget.dart';
@@ -50,17 +51,19 @@ class AddUserTabView extends GetView<AddUserTabController>{
                     AppTextFieldTitle(text: "userRole".tr, isRequired: true),
                     AppDropDownWidget(selectedValue: controller.selectedRole, values: controller.roles, onSelect: (r) => controller.selectRole(r)),
                     SizedBox(height: 6.h,),
-                    Visibility(
-                      visible: widgetState == WidgetState.loading,
-                      replacement: AppButtonWidget(
-                        color: Color(0xff2BC990),
-                          text: 'addUser'.tr, onPressed: (){
-                        if(controller.selectedRole == null){
-                          AppSnackbar.show( message: "select user's role" ,error: true);
-                        } else if(_useFormKey.currentState!.validate()){
-                          controller.addUser();
-                        }}),
-                      child: const LoadingWidget(),
+                    Center(
+                      child: Visibility(
+                        visible: widgetState == WidgetState.loading,
+                        replacement: AppButtonWidget(
+                          color: AppColors.colorPrimary,
+                            text: 'addUser'.tr, onPressed: (){
+                          if(controller.selectedRole == null){
+                            AppSnackbar.show( message: "select user's role" ,error: true);
+                          } else if(_useFormKey.currentState!.validate()){
+                            controller.addUser();
+                          }}),
+                        child: const LoadingWidget(),
+                      ),
                     ),
                   ],
                 ),

@@ -11,32 +11,28 @@ class AddTypeController extends GetxStateController{
   AddTypeController({required this.firebaseStore});
 
   FirebaseStoreManager firebaseStore;
-  productType ?type;
-  TextEditingController typeController = TextEditingController();
-  List<String> types = ['mainType'.tr,'subType'.tr];
-  String? selectedType ;
+  productType ?subType;
+  TextEditingController subTypeController = TextEditingController();
   List<productType> mainTypes = [] ;
   productType ?selectedMainType ;
 
 
   @override
   void onInit()async {
-    await getMainTypes();
-    typeController.text = type?.name??"";
-    selectedMainType = mainTypes.first;
+    await getMTypes();
+    subTypeController.text = subType?.name??"";
     super.onInit();
 
   }
 
-  void addType() async {
+  void addSubType() async {
   requestMethod(
-      ids: ["addType"],
+      ids: ["addSubType"],
       requestType: RequestType.postData,
       function: () async {
-        type = productType(name: typeController.text);
-      //  await Future.delayed(const Duration(seconds: 1));
-      await firebaseStore.addData(data: type?.toJson(),
-         collectionPath: Constant.mainTypeCollectionPath,
+        subType = productType(name: subTypeController.text);
+      await firebaseStore.addData(data: subType?.toJson(),
+         collectionPath: '${Constant.mainTypeCollectionPath}/${selectedMainType?.id}/${Constant.subTypeCollectionPath}',
           message: 'typeAdded'.tr, errorMessage: 'FailedToAddType'.tr
          );
        clearData();
@@ -44,32 +40,28 @@ class AddTypeController extends GetxStateController{
       });
   }
 
-  void selectType(String r){
-    selectedType = r ;
-    update(['addType']);
-  }
 
   void clearData(){
-    type = null ;
-    typeController.text = '' ;
-    selectedType = null;
-    update(['addType']);
+    subType = null ;
+    subTypeController.text = '' ;
+    selectedMainType = null;
+    update(['addSubType', 'mainType']);
   }
 
 
   void selectMainType(productType value){
     selectedMainType = value ;
-    //get subType by mainTypeId
-    update(['addType']);
+    update(['mainType']);
   }
 
-  Future getMainTypes() async {
-    requestMethod(ids: ['addType'],
+  Future getMTypes() async {
+    requestMethod(ids: ['mainType'],
         requestType: RequestType.getData,
         function: () async {
           QuerySnapshot result = await firebaseStore.getData(Constant.mainTypeCollectionPath);
           mainTypes.clear();
           mainTypes.addAll(productTypeFromJson(result.docs));
+          selectedMainType = mainTypes.first;
           return null ;
         });
   }

@@ -79,7 +79,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     Get.offAndToNamed(AppRoutes.adminPrimaryRoute);
                   }),
                   MenuItemWidget(
-                  title: "addProduct".tr,
+                  title: "addType".tr,
                   iconData: Icons.account_tree_rounded,
                   index: 0,
                   onClick: () {

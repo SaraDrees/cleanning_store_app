@@ -1,25 +1,25 @@
+import 'package:cleanning_store_app/core/app_colors.dart';
 import 'package:cleanning_store_app/core/utitlities.dart';
 import 'package:cleanning_store_app/core/view/app_button_widget.dart';
 import 'package:cleanning_store_app/core/view/app_text_field.dart';
 import 'package:cleanning_store_app/core/view/app_text_field_title.dart';
 import 'package:cleanning_store_app/core/view/loading_widget.dart';
-import 'package:cleanning_store_app/core/view/main_scaffold.dart';
 import 'package:cleanning_store_app/core/widget_state_widget.dart';
-import 'package:cleanning_store_app/features/admin/add_type_tab/add_type_tab_controller.dart';
+import 'package:cleanning_store_app/features/admin/add_type_tab/add_main_Type_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
-class AddTypeTabView extends GetView<AddTypeController>{
+class AddTypeTabView extends GetView<AddMTypeController>{
   AddTypeTabView({super.key});
 
   final _useFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return  StateBuilder<AddTypeController>(
-            id: "addType",
+    return  StateBuilder<AddMTypeController>(
+            id: "addMType",
             disableState: true,
             initialWidgetState: WidgetState.loaded,
             builder: (widgetState, controller) {
@@ -30,7 +30,7 @@ class AddTypeTabView extends GetView<AddTypeController>{
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      AppTextFieldTitle(text: "selectType".tr, isRequired: true),
+                      AppTextFieldTitle(text: "type".tr, isRequired: true),
                       AppTextField(
                         controller: controller.typeController,
                         validator: (value) => filedRequired(value),
@@ -38,18 +38,20 @@ class AddTypeTabView extends GetView<AddTypeController>{
                       // AppDropDownWidget(selectedValue: controller.selectedType, values: controller.types,
                       // onSelect: (t) => controller.selectType(t)),
                       SizedBox(height: 6.h,),
-                      Visibility(
-                        visible: widgetState == WidgetState.loading,
-                        replacement: AppButtonWidget(
-                            color: Color(0xff2BC990),
-                            text: 'addType'.tr, onPressed: (){
-                          // if(controller.selectedType == null){
-                          //   AppSnackbar.show( message: "selectUserType".tr ,error: true);
-                          // } else
-                          if(_useFormKey.currentState!.validate()){
-                            controller.addType();
-                          }}),
-                        child: const LoadingWidget(),
+                      Center(
+                        child: Visibility(
+                          visible: widgetState == WidgetState.loading,
+                          replacement: AppButtonWidget(
+                              color: AppColors.colorPrimary,
+                              text: 'addType'.tr, onPressed: (){
+                            // if(controller.selectedType == null){
+                            //   AppSnackbar.show( message: "selectUserType".tr ,error: true);
+                            // } else
+                            if(_useFormKey.currentState!.validate()){
+                              controller.addType();
+                            }}),
+                          child: const LoadingWidget(),
+                        ),
                       ),
                     ],
                   ),
