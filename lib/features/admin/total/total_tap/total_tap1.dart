@@ -8,12 +8,12 @@ import 'package:sizer/sizer.dart';
 
 import '../total_controller.dart';
 
-class TotalTap1View extends GetView<ProductsTabController>{
+class TotalTap1View extends GetView<TotalController>{
   const TotalTap1View({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return StateBuilder<ProductsTabController>(
+    return StateBuilder<TotalController>(
         id: "products",
         builder: (widgetState, controller) {
           return Padding(
