@@ -9,7 +9,7 @@ import '../../../core/app_colors.dart';
 import '../../../core/view/card_total.dart';
 import '../products_tab/products_tab_controller.dart';
 
-class TotalView extends GetView<ProductsTabController> {
+class TotalView extends GetView<TotalController> {
   const TotalView({super.key});
 
   @override

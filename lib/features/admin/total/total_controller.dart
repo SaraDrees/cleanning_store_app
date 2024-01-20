@@ -45,24 +45,25 @@ class TotalController extends GetxStateController{
               QuerySnapshot names1 = await FirebaseFirestore.instance.collection("mainType").doc(element).collection("name").get();
               names.addAll(names1.docs.map((e) => e.data()));
             });
-            names.forEach((n) {
-              data.forEach((d) {
-                if(n['name']==d.name&&d.inOut=="in")
-                  {
-                    totalIn+=d.quantity;
-                  }
-                if(n['name']==d.name&&d.inOut=="out")
-                {
-                  totalOut+=d.quantity;
-                }
-              });
-              print("sssssssssssssssssssssssssssssssssssssssssssssss ${names[i]['name']}");
-              i++;
-              s.addAll({"name":n,"total":totalIn-totalOut});
-              //productName.add(ProductName.fromJson(s));
-              totalIn=0;
-              totalOut=0;
-            });
+            print("sssssssssssssssssssssssssssssssssssssssssssssss ${names}");
+            // names.forEach((n) {
+            //   data.forEach((d) {
+            //     if(n['name']==d.name&&d.inOut=="in")
+            //       {
+            //         totalIn+=d.quantity;
+            //       }
+            //     if(n['name']==d.name&&d.inOut=="out")
+            //     {
+            //       totalOut+=d.quantity;
+            //     }
+            //   });
+            //   print("sssssssssssssssssssssssssssssssssssssssssssssss ${names[i]['name']}");
+            //   i++;
+            //   s.addAll({"name":n,"total":totalIn-totalOut});
+            //   //productName.add(ProductName.fromJson(s));
+            //   totalIn=0;
+            //   totalOut=0;
+            // });
 
             update(['total']);
             return null;

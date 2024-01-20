@@ -34,7 +34,7 @@ class LoginController extends GetxStateController{
   if(temp == null){
     AppSnackbar.show(message: "FailedToLogin".tr, error: true);
   }else if((user?.name == 'ahmad' && user?.password == '123456') || (temp.role??false)){
-    Get.offAndToNamed(AppRoutes.adminPageRoute);
+    Get.offAndToNamed(AppRoutes.totalRoute);
   }else{
     Get.offAndToNamed(AppRoutes.homePageRoute);
   }

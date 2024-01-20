@@ -20,12 +20,15 @@ class CardTotal extends StatelessWidget {
       child: Container(
           decoration: BoxDecoration(color: Colors.blueGrey,
               borderRadius: BorderRadius.circular(10)),
-          child: Column(
-            children: [
-              Text("dwqd"),
-              SizedBox(height: 2.h,),
-              Text("433")
-            ],
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("dwqd",style: TextStyle(fontSize: 20,color: Colors.white),),
+                SizedBox(height: 2.h,),
+                Text("433",style: TextStyle(fontSize: 20,color: Colors.white))
+              ],
+            ),
           )
       ),
     );
