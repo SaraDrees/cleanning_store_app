@@ -11,22 +11,31 @@ class ProductsTabViewOS extends GetView<ProductsTabController>{
 
   @override
   Widget build(BuildContext context) {
-    return StateBuilder<ProductsTabController>(
-        id: "products",
-        builder: (widgetState, controller) {
-          return Padding(
-            padding: EdgeInsets.only(top: 3.h),
-            child: ListView.separated(
-                separatorBuilder: (cnt,i){
-                  return Container(
-                    height: 1.5.h,
-                  );
-                },
-                itemCount: controller.outSData.length,
-                itemBuilder: (context,i){
-                  return CardProduct(product: controller.outSData[i], index: i,color: AppColors.colorRed,);
-                }),
-          );}
+    return Scaffold(
+      body: StateBuilder<ProductsTabController>(
+          id: "products",
+          builder: (widgetState, controller) {
+            return Padding(
+              padding: EdgeInsets.only(top: 3.h),
+              child: ListView.separated(
+                  separatorBuilder: (cnt,i){
+                    return Container(
+                      height: 1.5.h,
+                    );
+                  },
+                  itemCount: controller.outSData.length,
+                  itemBuilder: (context,i){
+                    return CardProduct(product: controller.outSData[i], index: i,color: AppColors.colorRed,);
+                  }),
+            );}
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          controller.exportCSVOutS();
+
+        },
+        child: Icon(Icons.file_download),
+      ),
     ) ;
   }
 

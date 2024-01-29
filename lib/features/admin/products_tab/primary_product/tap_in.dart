@@ -11,22 +11,31 @@ class ProductsTabViewIP extends GetView<ProductsTabController>{
 
   @override
   Widget build(BuildContext context) {
-    return StateBuilder<ProductsTabController>(
-        id: "products",
-        builder: (widgetState, controller) {
-          return Padding(
-            padding: EdgeInsets.only(top: 3.h),
-            child: ListView.separated(
-                separatorBuilder: (cnt,i){
-                  return Container(
-                    height: 1.5.h,
-                  );
-                },
-                itemCount: controller.inPData.length,
-                itemBuilder: (context,i){
-                  return CardProduct(product: controller.inPData[i], index: i,color: AppColors.colorPrimary,);
-                }),
-          );}
+    return Scaffold(
+      body: StateBuilder<ProductsTabController>(
+          id: "products",
+          builder: (widgetState, controller) {
+            return Padding(
+              padding: EdgeInsets.only(top: 3.h),
+              child: ListView.separated(
+                  separatorBuilder: (cnt,i){
+                    return Container(
+                      height: 1.5.h,
+                    );
+                  },
+                  itemCount: controller.inPData.length,
+                  itemBuilder: (context,i){
+                    return CardProduct(product: controller.inPData[i], index: i,color: AppColors.colorPrimary,);
+                  }),
+            );}
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          controller.exportCSVInP();
+
+        },
+        child: Icon(Icons.file_download),
+      ),
     ) ;
   }
 

@@ -5,19 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class AppDrawer extends StatefulWidget {
-  const AppDrawer({super.key});
+import '../../features/admin/products_tab/products_tab_controller.dart';
 
-  @override
-  State<AppDrawer> createState() => _AppDrawerState();
-}
 
-class _AppDrawerState extends State<AppDrawer> {
 
-  @override
-  void initState() {
-    super.initState();
-  }
+class AppDrawer extends GetView<ProductsTabController> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +55,14 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           child: Column(
             children: [
+              MenuItemWidget(
+                  title: "home".tr,
+                  iconData: Icons.home,
+                  index: 0,
+                  onClick: () {
+                    Get.currentRoute == AppRoutes.totalRoute? null :
+                    Get.offAndToNamed(AppRoutes.totalRoute);
+                  }),
                 MenuItemWidget(
                   title: "storPage".tr,
                   iconData: Icons.store,
@@ -94,6 +95,13 @@ class _AppDrawerState extends State<AppDrawer> {
                     Get.currentRoute == AppRoutes.addUser? null :
                     Get.offAndToNamed(AppRoutes.addUser);
                   }),
+              MenuItemWidget(
+                  title: "Export Ecxel".tr,
+                  iconData: Icons.file_open_rounded,
+                  index: 0,
+                  onClick: () {
+                    controller.exportCSV();
+                  }),
 
                
               const Expanded(child: SizedBox() ),
@@ -105,7 +113,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   title: "signOut".tr,
                   iconData: Icons.logout,
                   onClick: () async {
-                    Get.offAndToNamed(AppRoutes.loginPageRoute);
+                    Get.offAllNamed(AppRoutes.loginPageRoute);
                   }),
               SizedBox(
                 height: 1.5.h,

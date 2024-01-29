@@ -34,7 +34,7 @@ class _MainScaffoldState extends State<MainScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: widget.drawer ?? const AppDrawer(),
+      drawer: widget.drawer ??  AppDrawer(),
       appBar: AppBar(
         centerTitle: true,
         leadingWidth: 7.w,

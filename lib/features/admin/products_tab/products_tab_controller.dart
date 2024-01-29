@@ -21,6 +21,10 @@ class ProductsTabController extends GetxStateController{
   late List<Product> inPData ;
   late List<Product> outPData ;
   late List<List<dynamic>> dataList;
+  late List<List<dynamic>> dataList1;
+  late List<List<dynamic>> dataList2;
+  late List<List<dynamic>> dataList3;
+  late List<List<dynamic>> dataList4;
 
 
 
@@ -33,6 +37,11 @@ class ProductsTabController extends GetxStateController{
     inPData=[];
     outPData=[];
     dataList=[];
+    dataList1=[];
+    dataList2=[];
+    dataList3=[];
+    dataList4=[];
+
 
     getProduct();
 
@@ -71,6 +80,10 @@ class ProductsTabController extends GetxStateController{
                 outPData.add(element);
             });
             fillData();
+            fillDataInS();
+            fillDataOutS();
+            fillDataInP();
+            fillDataOutP();
             update(['products']);
             return null;
           });
@@ -97,8 +110,77 @@ class ProductsTabController extends GetxStateController{
     }catch(e){}
   }
 
+  Future<void> exportCSVInS() async {
+    try {
+      final csvData = const ListToCsvConverter().convert(dataList1);
+      final directory = await getTemporaryDirectory();
+      final filePath = '${directory.path}/ss.csv';
+      final file = File(filePath);
+      await file.writeAsString(csvData);
+      await Share.shareXFiles([XFile(filePath)]).then((value) async {
+        if (value.status == ShareResultStatus.success) {
+          await file.delete();
+        }
+      });
+    }catch(e){}
+  }
+  Future<void> exportCSVOutS() async {
+    try {
+      final csvData = const ListToCsvConverter().convert(dataList2);
+      final directory = await getTemporaryDirectory();
+      final filePath = '${directory.path}/ss.csv';
+      final file = File(filePath);
+      await file.writeAsString(csvData);
+      await Share.shareXFiles([XFile(filePath)]).then((value) async {
+        if (value.status == ShareResultStatus.success) {
+          await file.delete();
+        }
+      });
+    }catch(e){}
+  }
+  Future<void> exportCSVInP() async {
+    try {
+      final csvData = const ListToCsvConverter().convert(dataList3);
+      final directory = await getTemporaryDirectory();
+      final filePath = '${directory.path}/ss.csv';
+      final file = File(filePath);
+      await file.writeAsString(csvData);
+      await Share.shareXFiles([XFile(filePath)]).then((value) async {
+        if (value.status == ShareResultStatus.success) {
+          await file.delete();
+        }
+      });
+    }catch(e){}
+  }
+  Future<void> exportCSVOutP() async {
+    try {
+      final csvData = const ListToCsvConverter().convert(dataList4);
+      final directory = await getTemporaryDirectory();
+      final filePath = '${directory.path}/ss.csv';
+      final file = File(filePath);
+      await file.writeAsString(csvData);
+      await Share.shareXFiles([XFile(filePath)]).then((value) async {
+        if (value.status == ShareResultStatus.success) {
+          await file.delete();
+        }
+      });
+    }catch(e){}
+  }
+
   fillData(){
-    dataList =[["Type","Main Type","name","Quantity","invoiceNumber","Date","Emp Name"],data.map((pr) => [pr.type, pr.mainType,pr.name,pr.quantity,pr.invoiceNumber,pr.date,pr.empName]).toList()];
+    dataList =[["Type","Main Type","name","Quantity","invoiceNumber","Input and output status","Date","Emp Name"],...data.map((pr) => [pr.type, pr.mainType,pr.name,pr.quantity,pr.invoiceNumber,pr.inOut,pr.date,pr.empName]).toList()];
+  }
+  fillDataInS(){
+    dataList1 =[["Type","Main Type","name","Quantity","invoiceNumber","Input and output status","Date","Emp Name"],...inSData.map((pr) => [pr.type, pr.mainType,pr.name,pr.quantity,pr.invoiceNumber,pr.inOut,pr.date,pr.empName]).toList()];
+  }
+  fillDataOutS(){
+    dataList2 =[["Type","Main Type","name","Quantity","invoiceNumber","Input and output statu++s","Date","Emp Name"],...outSData.map((pr) => [pr.type, pr.mainType,pr.name,pr.quantity,pr.invoiceNumber,pr.inOut,pr.date,pr.empName]).toList()];
+  }
+  fillDataInP(){
+    dataList3 =[["Type","Main Type","name","Quantity","invoiceNumber","Input and output status","Date","Emp Name"],...inPData.map((pr) => [pr.type, pr.mainType,pr.name,pr.quantity,pr.invoiceNumber,pr.inOut,pr.date,pr.empName]).toList()];
+  }
+  fillDataOutP(){
+    dataList4 =[["Type","Main Type","name","Quantity","invoiceNumber","Input and output status","Date","Emp Name"],...outPData.map((pr) => [pr.type, pr.mainType,pr.name,pr.quantity,pr.invoiceNumber,pr.inOut,pr.date,pr.empName]).toList()];
   }
 
 

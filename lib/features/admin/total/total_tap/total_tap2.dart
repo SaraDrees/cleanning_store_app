@@ -8,13 +8,13 @@ import 'package:sizer/sizer.dart';
 
 import '../total_controller.dart';
 
-class TotalTap2View extends GetView<ProductsTabController>{
+class TotalTap2View extends GetView<TotalController>{
   const TotalTap2View({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return StateBuilder<ProductsTabController>(
-        id: "products",
+    return StateBuilder<TotalController>(
+        id: "total",
         builder: (widgetState, controller) {
           return Padding(
             padding: EdgeInsets.only(top: 3.h),
@@ -24,9 +24,9 @@ class TotalTap2View extends GetView<ProductsTabController>{
                 crossAxisSpacing: 8.0,
                 mainAxisSpacing: 8.0,
               ),
-              itemCount: 20,
+              itemCount: controller.p.length,
               itemBuilder: (BuildContext context, int index) {
-                return CardTotal();
+                return CardTotal(product: controller.p[index]);
               },
             ),
           );}

@@ -21,6 +21,7 @@ import 'features/admin/add_user_tab/add_user_tab_view.dart';
 import 'features/admin/admin_binding.dart';
 import 'features/admin/products_tab/primary_product/admin_primary.dart';
 import 'features/admin/products_tab/primary_product/product_primary.dart';
+import 'features/admin/total/total_emp.dart';
 
 part 'package:cleanning_store_app/core/routing/app_pages.dart';
 

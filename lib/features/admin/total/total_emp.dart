@@ -7,16 +7,17 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 
 import '../../../core/app_colors.dart';
+import '../../../core/routing/routes.dart';
 import '../../../core/view/card_total.dart';
 import '../products_tab/products_tab_controller.dart';
 
-class TotalView extends GetView<TotalController> {
-  const TotalView({super.key});
+class TotalEmp extends GetView<TotalController> {
+  const TotalEmp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(length: 2,
-        child: MainScaffold(body: Scaffold(
+        child: Scaffold(
           appBar: AppBar(
             bottom: TabBar(
               indicatorColor: AppColors.colorPrimary,
@@ -39,8 +40,16 @@ class TotalView extends GetView<TotalController> {
               TotalTap2View(),
             ],
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: (){
+              Get.offAndToNamed(AppRoutes.homePageRoute);
 
-        ),title: "Total",)
+            },
+            child: Icon(Icons.account_tree_outlined),
+          ),
+
+        )
+
     );
   }
 }

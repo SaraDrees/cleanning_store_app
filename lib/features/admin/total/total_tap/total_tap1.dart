@@ -14,20 +14,20 @@ class TotalTap1View extends GetView<TotalController>{
   @override
   Widget build(BuildContext context) {
     return StateBuilder<TotalController>(
-        id: "products",
+        id: "total",
         builder: (widgetState, controller) {
           return Padding(
             padding: EdgeInsets.only(top: 3.h),
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 1.0,
+                mainAxisSpacing: 15.0,
               ),
-              itemCount: 20,
+              itemCount: controller.s.length,
               itemBuilder: (BuildContext context, int index) {
 
-                return CardTotal();
+                return CardTotal(product: controller.s[index],);
               },
             ),
           );}

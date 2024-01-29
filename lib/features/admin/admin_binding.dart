@@ -15,6 +15,6 @@ class AdminBinding extends Bindings{
     ProductsTabBinding().dependencies();
     AddUserTabBinding().dependencies();
     AddTypeBinding().dependencies();
-    //TotalBinding().dependencies();
+    TotalBinding().dependencies();
   }
 }

@@ -39,6 +39,22 @@ class AddTypeController extends GetxStateController{
         return null;
       });
   }
+  void deleteSubType() async {
+    requestMethod(
+        ids: ["addSubType"],
+        requestType: RequestType.postData,
+        function: () async {
+          subType = productType(name: subTypeController.text);
+          await firebaseStore.addData(data: subType?.toJson(),
+              collectionPath: '${Constant.mainTypeCollectionPath}/${selectedMainType?.id}/${Constant.subTypeCollectionPath}',
+              message: 'typeAdded'.tr, errorMessage: 'FailedToAddType'.tr
+          );
+          clearData();
+          return null;
+        });
+  }
+
+
 
 
   void clearData(){

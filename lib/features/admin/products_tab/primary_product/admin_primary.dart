@@ -29,6 +29,6 @@ class _AdminPrimaryState extends State<AdminPrimary> with TickerProviderStateMix
         length: 3,
         child: MainScaffold(
           body:  ProductsTabViewPrimary(),
-          title: 'products'.tr,) );
+          title: "Primary Page",) );
   }
 }

@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../core/routing/routes.dart';
+
 // ignore: must_be_immutable
 class HomePage extends GetView<HomeController> {
   final _formKey = GlobalKey<FormState>();
@@ -174,6 +176,13 @@ class HomePage extends GetView<HomeController> {
                   ),
                 );
               })),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Get.offAllNamed(AppRoutes.totalEmpRoute);
+
+        },
+        child: Icon(Icons.account_tree_outlined),
+      ),
     );
   }
 }

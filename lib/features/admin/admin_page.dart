@@ -1,5 +1,7 @@
 import 'package:cleanning_store_app/core/view/main_scaffold.dart';
 import 'package:cleanning_store_app/features/admin/products_tab/products_tab_view.dart';
+
+import 'package:cleanning_store_app/features/admin/total/total_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +30,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
         length: 3,
         child: MainScaffold(
         body:  ProductsTabView(),
-         title: 'products'.tr,) );
+         title: "Store Page",) );
   }
 
 

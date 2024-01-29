@@ -17,9 +17,13 @@ class TotalController extends GetxStateController{
   late List names;
   late List <ProductName> productName;
   var totalIn=0;
-  var i=0;
   var totalOut=0;
-  Map<String,dynamic> s={};
+  var totalInP=0;
+  var totalOutP=0;
+  var h1=false;
+  var h2=false;
+  List<Map<String,dynamic>> s=[];
+  List<Map<String,dynamic>> p=[];
 
   @override
   void onInit() {
@@ -41,29 +45,54 @@ class TotalController extends GetxStateController{
             data.addAll(productFromJson((products.docs.map((e) => e.data() as Map<String, dynamic>? ).toList())));
             var mainType1 = await firebaseStore.getData("mainType");
             mainType.addAll(mainType1.docs.map((e) => e.id));
-            mainType.forEach((element) async{
-              QuerySnapshot names1 = await FirebaseFirestore.instance.collection("mainType").doc(element).collection("name").get();
-              names.addAll(names1.docs.map((e) => e.data()));
-            });
+
+
+            for(int i=0;i<mainType.length;i++)
+              {
+                QuerySnapshot names1 = await FirebaseFirestore.instance.collection("mainType").doc(mainType[i]).collection("name").get();
+                names.addAll(names1.docs.map((e) => e.data()));
+
+              }
             print("sssssssssssssssssssssssssssssssssssssssssssssss ${names}");
-            // names.forEach((n) {
-            //   data.forEach((d) {
-            //     if(n['name']==d.name&&d.inOut=="in")
-            //       {
-            //         totalIn+=d.quantity;
-            //       }
-            //     if(n['name']==d.name&&d.inOut=="out")
-            //     {
-            //       totalOut+=d.quantity;
-            //     }
-            //   });
-            //   print("sssssssssssssssssssssssssssssssssssssssssssssss ${names[i]['name']}");
-            //   i++;
-            //   s.addAll({"name":n,"total":totalIn-totalOut});
-            //   //productName.add(ProductName.fromJson(s));
-            //   totalIn=0;
-            //   totalOut=0;
-            // });
+            print("sssssssssssssssssssssssssssssssssssssssssssssss ${data}");
+
+            for(var i in names)
+              {
+                for(var j in data)
+                  {
+                    if(i["name"]==j.name && j.inOut=="in"&&j.type=="Finished product"){
+                      h1=true;
+                      totalIn+=j.quantity;
+                    }
+                    if(i["name"]==j.name && j.inOut=="out"&&j.type=="Finished product"){
+                      h1=true;
+                      totalOut+=j.quantity;
+                    }
+
+                    if(i["name"]==j.name && j.inOut=="in"&&j.type=="Primary product")
+                      {
+                        h2=true;
+                        totalInP+=j.quantity;
+                      }
+
+                    if(i["name"]==j.name && j.inOut=="out"&&j.type=="Primary product"){
+                      h2=true;
+                      totalOutP+=j.quantity;
+                    }
+
+                  }
+                if(h1)
+                s.addAll([{"name":i['name'],"total":totalIn-totalOut}]);
+                if(h2)
+                p.addAll([{"name":i['name'],"total":totalInP-totalOutP}]);
+                totalOut=0;
+                totalIn=0;
+                totalOutP=0;
+                totalInP=0;
+                h1=false;
+                h2=false;
+                print("sssssssssssssssssssssssssssssssssssssssssssssss ${s}");
+              }
 
             update(['total']);
             return null;

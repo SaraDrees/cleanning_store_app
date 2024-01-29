@@ -6,6 +6,7 @@ class Translation extends Translations {
         'en_US': {
           'login': 'Log in',
           'type': 'Type',
+          'home':'Home',
           'storPage':'Stor Page',
           'primaryPage':'Primary Page',
           'password': 'Your Password',

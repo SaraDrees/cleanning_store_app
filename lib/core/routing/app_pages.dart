@@ -53,6 +53,13 @@ class _AppPages {
         binding: AdminBinding(),
         transition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 500)
+    ),
+    GetPage(
+        name: AppRoutes.totalEmpRoute,
+        page: () => TotalEmp(),
+        binding: AdminBinding(),
+        transition: Transition.fadeIn,
+        transitionDuration: const Duration(milliseconds: 500)
     )
   ];
 }
